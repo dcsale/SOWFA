@@ -2,3 +2,7 @@
 *lnInclude
 *~
 *.dep
+*.mod
+*.o
+*.a
+*.log
