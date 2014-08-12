@@ -1,15 +1,9 @@
 #!/bin/bash
-
-
-cd src/turbulenceModels/incompressible/LES/
-rmdepall
-wclean
-cd ../../../../
-
-cd src/turbineModels
-rmdepall
-wclean
-cd ../../
+cd src/openfast/bin
+make clean
+rm FAST
+rm applications/solvers/incompressible/windEnergy/windPlantSolverFAST/fast/bin/libfast.a
+cd ../../../
 
 cd src/fastturb
 rmdepall
@@ -17,6 +11,16 @@ wclean
 cd ../../
 
 cd src/finiteVolume
+rmdepall
+wclean
+cd ../../
+
+cd src/turbulenceModels/incompressible/LES/
+rmdepall
+wclean
+cd ../../../../
+
+cd src/turbineModels
 rmdepall
 wclean
 cd ../../
