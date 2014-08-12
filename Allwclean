@@ -2,7 +2,7 @@
 cd src/openfast/bin
 make clean
 rm FAST
-rm applications/solvers/incompressible/windEnergy/windPlantSolverFAST/fast/bin/libfast.a
+rm ./../../../applications/solvers/incompressible/windEnergy/windPlantSolverFAST/fast/bin/libfast.a
 cd ../../../
 
 cd src/fastturb
