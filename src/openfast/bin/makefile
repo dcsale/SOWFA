@@ -34,7 +34,7 @@ FAST_Loc       = ../FAST/Source
 # | Comment in/out for GNU gfortran or Intel Fortran Compiler         |
 # +-------------------------------------------------------------------+
 # gnufortran
-compiler = gfortran
+compiler = gfortran -shared -fPIC
 sys      = SysGnu-linux
 #
 # Intel Fortran
