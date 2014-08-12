@@ -1,57 +1,57 @@
 #!/bin/bash
 cd src/openfast/bin
-make
-./libmake
+make 2>&1 | tee compile-openfast.log
+./libmake 2>&1 | tee compile-openfast-link.log
 cd ../../../
 
 cd src/fastturb
-wmake libso
+wmake libso 2>&1 | tee compile-fastturb.log
 cd ../../
 
 cd src/finiteVolume
-wmake libso
+wmake libso 2>&1 | tee compile-finiteVolume.log
 cd ../../
 
 cd src/turbulenceModels/incompressible/LES/
-wmake libso
+wmake libso 2>&1 | tee compile-LES.log
 cd ../../../../
 
 cd src/turbineModels
-wmake libso
+wmake libso 2>&1 | tee compile-turbineModels.log
 cd ../../
 
 cd applications/utilities/setFieldsABL
-wmake
+wmake 2>&1 | tee compile-setFieldsABL.log
 cd ../../../
 
 cd applications/utilities/setFieldsABL2
-wmake
+wmake 2>&1 | tee compile-setFieldsABL2.log
 cd ../../../
 
 cd applications/solvers/incompressible/windEnergy/ABLSolver
-wmake
+wmake 2>&1 | tee compile-ABLSolver.log
 cd ../../../../../
 
 cd applications/solvers/incompressible/windEnergy/ABLTerrainSolver
-wmake
+wmake 2>&1 | tee compile-ABLTerrainSolver.log
 cd ../../../../../
 
 cd applications/solvers/incompressible/windEnergy/windPlantSolver
-wmake
+wmake 2>&1 | tee compile-windPlantSolver.log
 cd ../../../../../
 
 cd applications/solvers/incompressible/windEnergy/windPlantSolverFAST
-wmake
+wmake 2>&1 | tee compile-windPlantSolverFAST.log
 cd ../../../../../
 
 cd applications/solvers/incompressible/windEnergy/pisoFoamTurbine
-wmake
+wmake 2>&1 | tee compile-pisoFoamTurbine.log
 cd ../../../../../
 
 cd applications/solvers/incompressible/windEnergy/pisoFoamTurbine.towerNacelle
-wmake
+wmake 2>&1 | tee compile-pisoFoamTurbine.towerNacelle.log
 cd ../../../../../
 
 cd applications/solvers/incompressible/windEnergy/turbineTestHarness
-wmake
+wmake 2>&1 | tee compile-turbineTestHarness.log
 cd ../../../../../
