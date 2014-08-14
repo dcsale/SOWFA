@@ -86,17 +86,12 @@ int main(int argc, char *argv[])
             {
                 volScalarField rAU(1.0/UEqn.A());
 
-                volVectorField HbyA("HbyA", U);
-                HbyA = rAU*UEqn.H();
-                surfaceScalarField phiHbyA
-                (
-                    "phiHbyA",
-                    (fvc::interpolate(HbyA) & mesh.Sf())
-                  + fvc::interpolate(rAU)*fvc::ddtCorr(U, phi)
-                );
-
-                adjustPhi(phiHbyA, U, p);
-
+                U = rAU*UEqn.H();
+                phi = (fvc::interpolate(U) & mesh.Sf())
+                    + fvc::ddtPhiCorr(rAU, U, phi);
+                
+                adjustPhi(phi, U, p);
+                
                 // Non-orthogonal pressure corrector loop
                 for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
                 {
