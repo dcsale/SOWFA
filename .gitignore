@@ -2,6 +2,7 @@
 *lnInclude
 *~
 *.dep
+/src/openfast/bin/FAST
 *.mod
 *.o
 *.a
