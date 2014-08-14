@@ -3,6 +3,7 @@ cd src/openfast/bin
 make clean
 rm FAST
 rm ./../../../applications/solvers/incompressible/windEnergy/windPlantSolverFAST/fast/bin/libfast.a
+rm ./../../../applications/solvers/incompressible/windEnergy/windPlantSolverFAST-2.1-and-higher/fast/bin/libfast.a
 cd ../../../
 
 cd src/fastturb
@@ -40,7 +41,17 @@ rmdepall
 wclean
 cd ../../../../../
 
+cd applications/solvers/incompressible/windEnergy/ABLSolver-2.1-and-higher
+rmdepall
+wclean
+cd ../../../../../
+
 cd applications/solvers/incompressible/windEnergy/ABLTerrainSolver
+rmdepall
+wclean
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/ABLTerrainSolver-2.1-and-higher
 rmdepall
 wclean
 cd ../../../../../
@@ -50,7 +61,17 @@ rmdepall
 wclean
 cd ../../../../../
 
+cd applications/solvers/incompressible/windEnergy/windPlantSolver-2.1-and-higher
+rmdepall
+wclean
+cd ../../../../../
+
 cd applications/solvers/incompressible/windEnergy/windPlantSolverFAST
+rmdepall
+wclean
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/windPlantSolverFAST-2.1-and-higher
 rmdepall
 wclean
 cd ../../../../../

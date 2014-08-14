@@ -1,57 +1,73 @@
 #!/bin/bash
-# cd src/openfast/bin
-# make 2>&1 | tee compile-openfast.log
-# ./libmake 2>&1 | tee compile-openfast-link.log
-# cd ../../../
+cd src/openfast/bin
+make 2>&1 | tee compile-openfast.log
+./libmake 2>&1 | tee compile-openfast-link.log
+cd ../../../
 
-# cd src/fastturb
-# wmake libso 2>&1 | tee compile-fastturb.log
-# cd ../../
+cd src/fastturb
+wmake libso 2>&1 | tee compile-fastturb.log
+cd ../../
 
-# cd src/finiteVolume
-# wmake libso 2>&1 | tee compile-finiteVolume.log
-# cd ../../
+cd src/finiteVolume
+wmake libso 2>&1 | tee compile-finiteVolume.log
+cd ../../
 
-# cd src/turbulenceModels/incompressible/LES/
-# wmake libso 2>&1 | tee compile-LES.log
-# cd ../../../../
+cd src/turbulenceModels/incompressible/LES/
+wmake libso 2>&1 | tee compile-LES.log
+cd ../../../../
 
-# cd src/turbineModels
-# wmake libso 2>&1 | tee compile-turbineModels.log
-# cd ../../
+cd src/turbineModels
+wmake libso 2>&1 | tee compile-turbineModels.log
+cd ../../
 
-# cd applications/utilities/setFieldsABL
-# wmake 2>&1 | tee compile-setFieldsABL.log
-# cd ../../../
+cd applications/utilities/setFieldsABL
+wmake 2>&1 | tee compile-setFieldsABL.log
+cd ../../../
 
-# cd applications/utilities/setFieldsABL2
-# wmake 2>&1 | tee compile-setFieldsABL2.log
-# cd ../../../
+cd applications/utilities/setFieldsABL2
+wmake 2>&1 | tee compile-setFieldsABL2.log
+cd ../../../
 
-cd applications/solvers/incompressible/windEnergy/ABLSolver
+# # cd applications/solvers/incompressible/windEnergy/ABLSolver
+# # wmake 2>&1 | tee compile-ABLSolver.log
+# # cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/ABLSolver-2.1-and-higher
 wmake 2>&1 | tee compile-ABLSolver.log
 cd ../../../../../
 
-# cd applications/solvers/incompressible/windEnergy/ABLTerrainSolver
-# wmake 2>&1 | tee compile-ABLTerrainSolver.log
-# cd ../../../../../
+# # cd applications/solvers/incompressible/windEnergy/ABLTerrainSolver
+# # wmake 2>&1 | tee compile-ABLTerrainSolver.log
+# # cd ../../../../../
 
-# cd applications/solvers/incompressible/windEnergy/windPlantSolver
-# wmake 2>&1 | tee compile-windPlantSolver.log
-# cd ../../../../../
+cd applications/solvers/incompressible/windEnergy/ABLTerrainSolver-2.1-and-higher
+wmake 2>&1 | tee compile-ABLTerrainSolver.log
+cd ../../../../../
 
-# cd applications/solvers/incompressible/windEnergy/windPlantSolverFAST
-# wmake 2>&1 | tee compile-windPlantSolverFAST.log
-# cd ../../../../../
+# # cd applications/solvers/incompressible/windEnergy/windPlantSolver
+# # wmake 2>&1 | tee compile-windPlantSolver.log
+# # cd ../../../../../
 
-# cd applications/solvers/incompressible/windEnergy/pisoFoamTurbine
-# wmake 2>&1 | tee compile-pisoFoamTurbine.log
-# cd ../../../../../
+cd applications/solvers/incompressible/windEnergy/windPlantSolver-2.1-and-higher
+wmake 2>&1 | tee compile-windPlantSolver.log
+cd ../../../../../
 
-# cd applications/solvers/incompressible/windEnergy/pisoFoamTurbine.towerNacelle
-# wmake 2>&1 | tee compile-pisoFoamTurbine.towerNacelle.log
-# cd ../../../../../
+# # cd applications/solvers/incompressible/windEnergy/windPlantSolverFAST
+# # wmake 2>&1 | tee compile-windPlantSolverFAST.log
+# # cd ../../../../../
 
-# cd applications/solvers/incompressible/windEnergy/turbineTestHarness
-# wmake 2>&1 | tee compile-turbineTestHarness.log
-# cd ../../../../../
+cd applications/solvers/incompressible/windEnergy/windPlantSolverFAST-2.1-and-higher
+wmake 2>&1 | tee compile-windPlantSolverFAST.log
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/pisoFoamTurbine
+wmake 2>&1 | tee compile-pisoFoamTurbine.log
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/pisoFoamTurbine.towerNacelle
+wmake 2>&1 | tee compile-pisoFoamTurbine.towerNacelle.log
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/turbineTestHarness
+wmake 2>&1 | tee compile-turbineTestHarness.log
+cd ../../../../../
