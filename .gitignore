@@ -7,3 +7,4 @@
 *.o
 *.a
 *.log
+/tutorials/fastDuct/turbineOutput/*
