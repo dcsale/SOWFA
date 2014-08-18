@@ -23,6 +23,10 @@ startFrom         startTime;
 
 startTime         0.0;
 
+startTimeMean     0.0;
+
+startTimeCorr     0.0;
+
 stopAt            endTime;
 
 endTime           0.1;
