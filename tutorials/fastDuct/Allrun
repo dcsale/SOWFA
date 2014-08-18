@@ -5,10 +5,11 @@ nodes=1
 cores=8
 
 # Make the mesh using blockMesh (serial)
-blockMesh > log.blockMesh 2>&1
+blockMesh 2>&1 | tee log.blockMesh
 
 # Decompose the mesh and solution files (serial)
-decomposePar > log.decomposePar 2>&1
+decomposePar 2>&1 | tee log.decomposePar
 
 # Run the solver (parallel)
-mpirun -np $(($nodes*$cores)) fastPisoSolver -parallel > log.fastPisoSolver 2>&1
+# mpirun -np $(($nodes*$cores)) fastPisoSolver -parallel 2>&1 | tee log.fastPisoSolver
+mpirun -np $(($nodes*$cores)) pisoFoamTurbine -parallel 2>&1 | tee log.pisoFoamTurbine
