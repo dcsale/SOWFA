@@ -18,7 +18,7 @@ FoamFile
 ddtSchemes
 {
 //  default                        backward;
-    default                        CrankNicholson 1.0;
+    default                        CrankNicolson 1.0;
 }
 
 gradSchemes
@@ -77,5 +77,29 @@ fluxRequired
 //    R                              0.5;
 //}
 
+schemeBlending
+{
+    // These inputs used in pisoFoamTurbine
+    xBlending1      0.00;
+    xBlending2      0.33;
+    xBlending3      0.66;
+    xBlending4      1.00;
+    blendingFactor1 0.25;
+    blendingFactor2 0.50;
+    
+    // These inputs used in ABLSolvers
+    // faceSize1
+    // faceSize2
+    // faceSize3
+    // faceSize4
+    // blendingFactorU1
+    // blendingFactorU2
+    // blendingFactorU3
+    // blendingFactorU4
+    // blendingFactorT1
+    // blendingFactorT2
+    // blendingFactorT3
+    // blendingFactorT4
+}
 
 // ************************************************************************* //
