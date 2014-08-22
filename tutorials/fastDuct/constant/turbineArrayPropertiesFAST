@@ -33,7 +33,7 @@ turbine1
 
 general
 {
-  yawAngle                30.0;
+  yawAngle                0.0;
   numberofBld             3;
   numberofBldPts          62;           
   rotorDiameter           126.3992;

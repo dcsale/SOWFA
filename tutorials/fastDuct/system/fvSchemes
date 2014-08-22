@@ -80,13 +80,13 @@ fluxRequired
 schemeBlending
 {
     // These inputs used in pisoFoamTurbine
-    xBlending1      0.00;
-    xBlending2      0.33;
+    xBlending1      0.20;
+    xBlending2      0.43;
     xBlending3      0.66;
-    xBlending4      1.00;
+    xBlending4      0.80;
     blendingFactor1 0.25;
     blendingFactor2 0.50;
-    
+
     // These inputs used in ABLSolvers
     // faceSize1
     // faceSize2

@@ -31,10 +31,10 @@ turbine1
     epsilon             3.5;
     tipRootLossCorrType "none";
     rotationDir         "cw";
-    Azimuth             232.0105;
+    Azimuth             0;
     TorqueGen		    200.0;
-    RotSpeed            10.9874;
+    RotSpeed            11;
     Pitch               0;
-    NacYaw              221.617;
+    NacYaw              0;
     fluidDensity        1.23;
 }
