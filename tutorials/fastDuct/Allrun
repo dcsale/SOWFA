@@ -13,3 +13,11 @@ decomposePar 2>&1 | tee log.decomposePar
 # Run the solver (parallel)
 # mpirun -np $(($nodes*$cores)) fastPisoSolver -parallel 2>&1 | tee log.fastPisoSolver
 mpirun -np $(($nodes*$cores)) pisoFoamTurbine -parallel 2>&1 | tee log.pisoFoamTurbine
+
+# Post-Processing
+# reconstruct the parallel filess for all times, or for only specific times
+reconstructPar
+# reconstructPar -time '2,4'
+
+# convert OpenFOAM format to VTK files
+foamToVTK
