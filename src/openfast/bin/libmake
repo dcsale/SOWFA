@@ -10,4 +10,6 @@ ar cr libfast.a \
       UserSubs.o UserVSCont_KP.o AeroCalc.o SetVersion.o FAST_Prog.o    \
       fastinit.o fastrun.o fastend.o fastread.o fastgetbldpos.o fastgetbldforce.o
 
+mkdir -p ./../../../applications/solvers/incompressible/windEnergy/windPlantSolverFAST-2.1-and-higher/fast/bin/
+
 cp libfast.a ./../../../applications/solvers/incompressible/windEnergy/windPlantSolverFAST-2.1-and-higher/fast/bin/
