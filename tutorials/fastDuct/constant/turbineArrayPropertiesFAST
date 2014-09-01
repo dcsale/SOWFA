@@ -17,16 +17,8 @@ FoamFile
 
 turbine0
 {
-  refx  1278.6292;
-  refy  1649.7201;
-  refz  0.0;
-  hubz  90.0;
-}
-
-turbine1
-{
-  refx  1806.088;
-  refy  2246.5762;
+  refx  200;
+  refy  0.0;
   refz  0.0;
   hubz  90.0;
 }

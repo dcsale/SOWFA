@@ -23,19 +23,19 @@ startFrom         startTime;
 
 startTime         0.0;
 
-startTimeMean     1.0;
+startTimeMean     0.0;
 
-startTimeCorr     2.0;
+startTimeCorr     0.0;
 
 stopAt            endTime;
 
-endTime           5.0;
+endTime           2.0;
 
-deltaT            0.025;
+deltaT            0.1;
 
 writeControl      adjustableRunTime;
 
-writeInterval     0.05; 
+writeInterval     0.1; 
 
 purgeWrite        0;
 
@@ -55,7 +55,7 @@ runTimeModifiable yes;
 
 adjustTimeStep    no;
 
-maxCo             0.75;
+maxCo             0.66;
 
 maxDeltaT         25.0;
 
