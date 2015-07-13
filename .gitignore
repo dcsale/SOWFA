@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-*linux64GccDPOpt*
-*lnInclude
-*~
-*.dep
-/src/openfast/bin/FAST
-*.mod
-*.o
-*.a
-*.log
-/tutorials/fastDuct/turbineOutput/*
-=======
 *~
 *.dep
 linux64GccDPOpt/
@@ -24,4 +12,11 @@ linux64GccDPDebug/
 *.autotools
 lnInclude_all.xml
 lnInclude/
->>>>>>> 129c72504a9f70b2394430c15b7e6ace52d6c806
+
+/src/openfast/bin/FAST
+*.mod
+*.o
+*.a
+*.log
+/tutorials/fastDuct/turbineOutput/*
+
