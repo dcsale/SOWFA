@@ -1,4 +1,5 @@
 #!/bin/bash
+<<<<<<< HEAD
 cd src/openfast/bin
 make 2>&1 | tee compile-openfast.log
 ./libmake 2>&1 | tee compile-openfast-link.log
@@ -14,12 +15,46 @@ cd ../../
 
 cd src/turbulenceModels/incompressible/LES/
 wmake libso 2>&1 | tee compile-LES.log
+=======
+
+echo "Building with OpenFOAM-"$OPENFOAM_VERSION
+
+version=${WM_PROJECT_VERSION:0:1}
+variant=${WM_PROJECT_VERSION:2:1}
+
+dir=2.0-and-lower
+if [ $version -lt 2 ]
+then
+   dir=2.0-and-lower
+elif [ $version -eq 2 ] && [ $variant -le 0 ]
+then
+   dir=2.0-and-lower
+elif [ $version -eq 2 ] && [ $variant -ge 1 ] && [ $variant -le 2 ]
+then
+   dir=2.1-2.2
+elif [ $version -eq 2 ] && [ $variant -ge 3 ]
+then
+   dir=2.3-and-higher
+fi
+
+
+
+cd src/turbulenceModels/incompressible/LES/
+cd GenEddyViscABL
+rm GenEddyViscABL.H
+rm GenEddyViscABL.C
+ln -s $dir/GenEddyViscABL.H ./
+ln -s $dir/GenEddyViscABL.C ./
+cd ../
+wmake libso
+>>>>>>> a7154af0e483944c28f61abc3d6de5d1c922d3a2
 cd ../../../../
 
 cd src/turbineModels
 wmake libso 2>&1 | tee compile-turbineModels.log
 cd ../../
 
+<<<<<<< HEAD
 cd applications/utilities/setFieldsABL
 wmake 2>&1 | tee compile-setFieldsABL.log
 cd ../../../
@@ -70,4 +105,65 @@ cd ../../../../../
 
 cd applications/solvers/incompressible/windEnergy/turbineTestHarness
 wmake 2>&1 | tee compile-turbineTestHarness.log
+=======
+cd src/finiteVolume
+wmake libso
+cd ../../
+
+cd applications/utilities/setFieldsABL
+wmake
+cd ../../../
+
+cd applications/solvers/incompressible/windEnergy/ABLSolver
+rm pEqn.H
+rm ABLSolver.C
+ln -s $dir/pEqn.H ./
+ln -s $dir/ABLSolver.C ./
+wmake
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/ABLTerrainSolver
+rm pEqn.H
+rm ABLTerrainSolver.C
+ln -s $dir/pEqn.H ./
+ln -s $dir/ABLTerrainSolver.C ./
+wmake
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/windPlantSolver
+rm pEqn.H
+rm windPlantSolver.C
+ln -s $dir/pEqn.H ./
+ln -s $dir/windPlantSolver.C ./
+wmake
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/pisoFoamTurbine
+rm pisoFoamTurbine.C
+ln -s $dir/pisoFoamTurbine.C
+wmake
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/pisoFoamTurbine.ADM
+rm pisoFoamTurbine.C
+ln -s $dir/pisoFoamTurbine.C
+wmake
+cd ../../../../../
+
+cd applications/solvers/incompressible/windEnergy/turbineTestHarness
+wmake
+cd ../../../../../
+
+cd src/openfast/bin
+make
+./libmake
+cd ../../../
+
+cd src/fastturb
+wmake libso
+cd ../../
+
+cd applications/solvers/incompressible/windEnergy/windPlantSolverFAST
+wmake
+>>>>>>> a7154af0e483944c28f61abc3d6de5d1c922d3a2
 cd ../../../../../

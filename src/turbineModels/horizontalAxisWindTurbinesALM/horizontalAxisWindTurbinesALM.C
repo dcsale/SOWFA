@@ -142,6 +142,7 @@ horizontalAxisWindTurbinesALM::horizontalAxisWindTurbinesALM
 
     outputControl = turbineArrayProperties.subDict("globalProperties").lookupOrDefault<word>("outputControl","timeStep");
     outputInterval = turbineArrayProperties.subDict("globalProperties").lookupOrDefault<scalar>("outputInterval",1);
+    perturb = turbineArrayProperties.subDict("globalProperties").lookupOrDefault<scalar>("perturb",1E-5);
     lastOutputTime = runTime_.startTime().value();
     outputIndex = 0;
 
@@ -438,6 +439,7 @@ horizontalAxisWindTurbinesALM::horizontalAxisWindTurbinesALM
 
 
 
+
     // Convert nacelle yaw from compass directions to the standard
     // convention of 0 degrees on the + x axis with positive degrees
     // in the counter-clockwise direction.
@@ -543,6 +545,7 @@ horizontalAxisWindTurbinesALM::horizontalAxisWindTurbinesALM
     // initialize the blade force, blade aligned coordinate system, and
     // wind vectors to zero.
     totBladePoints = 0;
+    Random rndGen(123456);
     for(int i = 0; i < numTurbines; i++)
     {
         int j = turbineTypeID[i];
@@ -610,8 +613,22 @@ horizontalAxisWindTurbinesALM::horizontalAxisWindTurbinesALM
             }
         }
 
-
-
+        // Generate randome numbers for the blade point perturbation during control
+        // processor identification.  This does not affect the actual location--it is
+        // just there to break ties and make sure > 1 processors don't account for a
+        // single blade point.
+        bladePointsPerturbVector.append(List<List<vector> >(NumBl[j], List<vector>(numBladePoints[i],vector::zero)));
+        if(Pstream::myProcNo() == 0)
+        {
+            for(int k =  0; k < NumBl[j]; k++)
+            {
+                for(int m = 0; m < numBladePoints[i]; m++)
+                {
+                    bladePointsPerturbVector[i][k][m] = perturb*(2.0*rndGen.vector01()-vector::one); 
+                }
+            }
+        }
+        
 
         // Define the size of the bladeForce array and set to zero.
         bladeForce.append(List<List<vector> >(NumBl[j], List<vector>(numBladePoints[i],vector::zero)));
@@ -662,7 +679,7 @@ horizontalAxisWindTurbinesALM::horizontalAxisWindTurbinesALM
         // Define the size of the cell-containing-actuator-point ID list and set to -1.
         minDisCellID.append(List<List<label> >(NumBl[j], List<label>(numBladePoints[i],-1)));
     }
-
+    Pstream::scatter(bladePointsPerturbVector);
 
 
     // Yaw the nacelle to initial position.
@@ -832,6 +849,7 @@ void horizontalAxisWindTurbinesALM::controlGenTorque()
         // Get the current filtered generator speed.
         scalar genSpeedF = (rotSpeedF[i]/rpmRadSec)*GBRatio[j];
 
+
         // Initialize the commanded generator torque variable;
         scalar torqueGenCommanded = torqueGen[i];
 
@@ -948,7 +966,6 @@ void horizontalAxisWindTurbinesALM::findControlProcNo()
     List<scalar> minDisLocal(totBladePoints,1.0E30);
     List<scalar> minDisGlobal(totBladePoints,1.0E30);
 
-
     forAll(turbinesControlled, p)
     {
         int i = turbinesControlled[p];
@@ -968,16 +985,16 @@ void horizontalAxisWindTurbinesALM::findControlProcNo()
                 // Find the cell that the actuator point lies within and the distance
                 // from the actuator line point to that cell center.
                 label cellID = sphereCells[i][0];
-                scalar minDis = mag(mesh_.C()[cellID] - bladePoints[i][j][k]);
+                scalar minDis = mag(mesh_.C()[cellID] - (bladePoints[i][j][k] + bladePointsPerturbVector[i][j][k]));
 
                 forAll(sphereCells[i], m)
                 {
-                    scalar dis = mag(mesh_.C()[sphereCells[i][m]] - bladePoints[i][j][k]);
+                    scalar dis = mag(mesh_.C()[sphereCells[i][m]] - (bladePoints[i][j][k] + bladePointsPerturbVector[i][j][k]));
                     if(dis <= minDis)
                     {
                         cellID = sphereCells[i][m];
                     }
-                    minDis = mag(mesh_.C()[cellID] - bladePoints[i][j][k]);
+                    minDis = mag(mesh_.C()[cellID] - (bladePoints[i][j][k] + bladePointsPerturbVector[i][j][k]));
                 }
                 minDisLocal[iter] = minDis;
                 minDisGlobal[iter] = minDis;
@@ -1179,6 +1196,8 @@ void horizontalAxisWindTurbinesALM::computeBladeForce()
 
                 // Find the local airfoil type.
                 label airfoil = interpolate(bladeRadius[i][j][k], BladeStation[m], BladeAirfoilTypeID[m]);
+                label maxIndex = BladeAirfoilTypeID[m].size() - 1;
+                airfoil = min(max(0,airfoil),maxIndex);
 
                 // Find the local velocity magnitude compose of only the axial and tangential flow (do
                 // not include the radial (along blade span) flow).
@@ -1422,7 +1441,7 @@ label horizontalAxisWindTurbinesALM::interpolate(scalar xNew, DynamicList<scalar
             indexP = index;
             indexM = indexP - 1;
         }
-        return yOld[indexM] + ((yOld[indexP] - yOld[indexM])/(xOld[indexP] - xOld[indexM]))*(xNew - xOld[indexM]);
+        return round(yOld[indexM] + ((yOld[indexP] - yOld[indexM])/(xOld[indexP] - xOld[indexM]))*(xNew - xOld[indexM]));
     }
     else if (xNew > xOld[index])
     {
@@ -1436,7 +1455,7 @@ label horizontalAxisWindTurbinesALM::interpolate(scalar xNew, DynamicList<scalar
             indexP = index + 1;
             indexM = indexP - 1;
         }
-        return yOld[indexM] + ((yOld[indexP] - yOld[indexM])/(xOld[indexP] - xOld[indexM]))*(xNew - xOld[indexM]);
+        return round(yOld[indexM] + ((yOld[indexP] - yOld[indexM])/(xOld[indexP] - xOld[indexM]))*(xNew - xOld[indexM]));
     }
     else if (xNew == xOld[index])
     {
