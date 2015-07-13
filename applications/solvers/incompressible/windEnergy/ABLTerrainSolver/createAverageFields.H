@@ -1,65 +1,64 @@
-    // Create and read in initial time-averaged velocity field.
-    Info << "Creating time-average velocity field, UAvg..." << endl;
-    volVectorField UAvg
+
+    // Create initial average temperature field
+    Info<< "Creating mean temperature field, Tmean..." << endl;
+    volScalarField Tmean
     (
         IOobject
         (
-            "UAvg",
+            "Tmean",
+            runTime.timeName(),
+            mesh,
+            IOobject::READ_IF_PRESENT,
+            IOobject::NO_WRITE
+        ),
+        T
+    );
+
+    // Create initial fluctuating temperature field
+    Info<< "Creating fluctuating temperature field, Tprime..." << endl;
+    volScalarField Tprime
+    (
+        IOobject
+        (
+            "Tprime",
             runTime.timeName(),
             mesh,
             IOobject::READ_IF_PRESENT,
             IOobject::AUTO_WRITE
         ),
-        mesh,
-        dimensionedVector("UAvg",dimensionSet(0, 1, -1, 0, 0, 0, 0),vector::zero)
+        T
     );
 
-    Info << "Creating time-average vorticity field, omegaAvg..." << endl;
-    volVectorField omegaAvg
+    // Create initial average velocity field
+    Info<< "Creating mean velocity field, Umean..." << endl;
+    volVectorField Umean
     (
         IOobject
         (
-            "omegaAvg",
+            "Umean",
+            runTime.timeName(),
+            mesh,
+            IOobject::READ_IF_PRESENT,
+            IOobject::NO_WRITE
+        ),
+        U
+    );
+
+    // Create initial fluctuating velocity field
+    Info<< "Creating fluctuating velocity field, Uprime..." << endl;
+    volVectorField Uprime
+    (
+        IOobject
+        (
+            "Uprime",
             runTime.timeName(),
             mesh,
             IOobject::READ_IF_PRESENT,
             IOobject::AUTO_WRITE
         ),
-        mesh,
-        dimensionedVector("omegaAvg",dimensionSet(0, 0, -1, 0, 0, 0, 0),vector::zero)
+        U
     );
 
-
-    // Create and read in initial time-averaged temperature field.
-    Info << "Creating time-averaged temperature field, TAvg..." << endl;
-    volScalarField TAvg
-    (
-        IOobject
-        (
-            "TAvg",
-            runTime.timeName(),
-            mesh,
-            IOobject::READ_IF_PRESENT,
-            IOobject::AUTO_WRITE
-        ),
-        mesh,
-        dimensionedScalar("TAvg",dimensionSet(0, 0, 0, 1, 0, 0, 0),0.0)
-    );
-
-    Info << "Creating time-averaged pressure field, p_rghAvg..." << endl;
-    volScalarField p_rghAvg
-    (
-        IOobject
-        (
-            "p_rghAvg",
-            runTime.timeName(),
-            mesh,
-            IOobject::READ_IF_PRESENT,
-            IOobject::AUTO_WRITE
-        ),
-        mesh,
-        dimensionedScalar("p_rghAvg",dimensionSet(0, 2, -2, 0, 0, 0, 0),0.0)
-    );
 
     // Create and read in initial RMS velocity field.
     Info << "Creating RMS velocity field, uRMS..." << endl;
@@ -203,22 +202,6 @@
         mesh,
         dimensionedScalar("kSGS",dimensionSet(0, 2, -2, 0, 0, 0, 0),0.0)
     );
-
-  //  Info<< "Creating SGS viscosity field, nuSGS..." << endl;
-  //  volScalarField nuSGS
-  //  (
-  //      IOobject
-  //      (
-  //          "nuSGS",
-  //          runTime.timeName(),
-  //          mesh,
-  //          IOobject::READ_IF_PRESENT,
-  //          IOobject::AUTO_WRITE
-  //      ),
-  //      mesh,
-  //      dimensionedScalar("nuSGS",dimensionSet(0, 2, -1, 0, 0, 0, 0),0.0)
-  //  );
-
 
     // Create the resolved-scale tke field.
     Info<< "Creating the resolved scale turbulent kinetic energy field, kResolved..." << endl;

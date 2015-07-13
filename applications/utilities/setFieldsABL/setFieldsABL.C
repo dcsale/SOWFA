@@ -371,7 +371,7 @@ if (updateBoundaryFields)
     Info << "Updating boundaries..." << endl;
     U.correctBoundaryConditions();
     T.correctBoundaryConditions();
-    p_rgh.correctBoundaryConditions();
+//     p_rgh.correctBoundaryConditions();
 }
 
 

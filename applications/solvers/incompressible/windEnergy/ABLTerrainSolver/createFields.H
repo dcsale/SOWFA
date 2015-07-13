@@ -13,36 +13,6 @@
         mesh
     );
 
-    // Create initial average temperature field
-    Info<< "Creating mean temperature field, Tmean..." << endl;
-    volScalarField Tmean
-    (
-        IOobject
-        (
-            "Tmean",
-            runTime.timeName(),
-            mesh,
-            IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
-        ),
-        T
-    );
-
-    // Create initial fluctuating temperature field
-    Info<< "Creating fluctuating temperature field, Tprime..." << endl;
-    volScalarField Tprime
-    (
-        IOobject
-        (
-            "Tprime",
-            runTime.timeName(),
-            mesh,
-            IOobject::READ_IF_PRESENT,
-            IOobject::AUTO_WRITE
-        ),
-        T
-    );
-
     // Create and read the modified pressure field
     Info << "Creating and reading modified pressure field, p_rgh..." << endl;
     volScalarField p_rgh
@@ -71,37 +41,6 @@
             IOobject::AUTO_WRITE
         ),
         mesh
-    );
-
-
-    // Create initial average velocity field
-    Info<< "Creating mean velocity field, Umean..." << endl;
-    volVectorField Umean
-    (
-        IOobject
-        (
-            "Umean",
-            runTime.timeName(),
-            mesh,
-            IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
-        ),
-        U
-    );
-
-    // Create initial fluctuating velocity field
-    Info<< "Creating fluctuating velocity field, Uprime..." << endl;
-    volVectorField Uprime
-    (
-        IOobject
-        (
-            "Uprime",
-            runTime.timeName(),
-            mesh,
-            IOobject::READ_IF_PRESENT,
-            IOobject::AUTO_WRITE
-        ),
-        U
     );
 
     // Create and calculate the velocity flux

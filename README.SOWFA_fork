@@ -1,0 +1,12 @@
+This a fork of the SOWFA (Simulator for Offshore Wind Farm Applications),
+created at the National Renewable Energy Laboratory (NREL). The original
+project can be downloaded or cloned here:
+
+https://github.com/NREL/SOWFA
+
+
+The purpose of this fork is to implement a nesting procedure in 
+ABLTerrainSolver and to fix some bugs. As I am not interested in the wind
+turbine part, I desactivated the compilation of those sources.
+
+Work in Progress!!

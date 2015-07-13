@@ -53,6 +53,7 @@ Description
 #include "IFstream.H"
 #include "OFstream.H"
 #include "wallDist.H"
+#include "interpolateSplineXY.H"
 
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -64,7 +65,7 @@ int main(int argc, char *argv[])
     #include "createMesh.H"
     #include "readGravitationalAcceleration.H"
     #include "createFields.H"
-    #include "createDivSchemeBlendingField.H"
+//     #include "createDivSchemeBlendingField.H"
     #include "createGradP.H"
     #include "readTimeControls.H"
     #include "CourantNo.H"
@@ -76,7 +77,7 @@ int main(int argc, char *argv[])
     //#include "openFaceStatisticsFiles.H"
     //#include "openABLStatisticsFiles.H"
     #include "createAverageFields.H"
-    #include "createVorticityQFields.H"
+//    #include "createVorticityQFields.H"
     #include "computeDivergence.H"
 
     pimpleControl pimple(mesh);
@@ -90,11 +91,12 @@ int main(int argc, char *argv[])
     // field.
     U.correctBoundaryConditions();
     phi = linearInterpolate(U) & mesh.Sf();
+    #include "turbulenceCorrect.H"
     T.correctBoundaryConditions();
   //p_rgh.correctBoundaryConditions();
-    turbulence->correct();
-    Rwall.correctBoundaryConditions();
-    qwall.correctBoundaryConditions();
+//    turbulence->correct();
+//    Rwall.correctBoundaryConditions();
+//    qwall.correctBoundaryConditions();
 
 
     while (runTime.loop())
@@ -105,19 +107,25 @@ int main(int argc, char *argv[])
         #include "readTimeControls.H"
         #include "CourantNo.H"
         #include "setDeltaT.H"
-        #include "updateDivSchemeBlendingField.H"
+//         #include "updateDivSchemeBlendingField.H"
 
         // --- Pressure-velocity PIMPLE corrector loop
         while (pimple.loop())
         {
+            Info << "   Predictor..." << endl;
             #include "UEqn.H"
+            #include "turbulenceCorrect.H"
             #include "TEqn.H"
 
             // --- Pressure corrector loop
+            int corr = 0;
             while (pimple.correct())
             {
+                Info << "   Corrector Step " << corr << "..." << endl;
                 #include "pEqn.H"
+                #include "turbulenceCorrect.H"
                 #include "TEqn.H"
+                corr++;
             }
 
             // --- Compute the velocity flux divergence
@@ -140,7 +148,7 @@ int main(int argc, char *argv[])
 
 
         #include "computeAverageFields.H"
-        #include "computeVorticityQ.H"
+//        #include "computeVorticityQ.H"
 //      if (runTime.outputTime())
 //      {
 //          #include "averageFields.H"
