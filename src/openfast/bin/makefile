@@ -36,8 +36,9 @@ FAST_Loc       = ../FAST/Source
 # gnufortran
 # can enable AVX2 instructions for modern XEON processors
 #compiler = gfortran -shared -fPIC -march=core-avx2
-compiler = gfortran -shared -fPIC -march=native
-#compiler = gfortran -shared -fPIC
+#compiler = gfortran -shared -fPIC -march=native
+#compiler = gfortran -shared -fPIC -mtune=intel
+compiler = gfortran -shared -fPIC
 sys      = SysGnu-linux
 #
 # Intel Fortran
