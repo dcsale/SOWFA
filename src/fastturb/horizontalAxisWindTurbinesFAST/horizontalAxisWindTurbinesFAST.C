@@ -110,7 +110,8 @@ horizontalAxisWindTurbinesFAST::horizontalAxisWindTurbinesFAST
     bldNum = readScalar(turbineArrayProperties.subDict(turbineName[turbNum]).lookup("numberofBld"));
     bldPts = readScalar(turbineArrayProperties.subDict(turbineName[turbNum]).lookup("numberofBldPts"));
     rotorD = readScalar(turbineArrayProperties.subDict(turbineName[turbNum]).lookup("rotorDiameter"));
-    epsilon = readScalar(turbineArrayProperties.subDict(turbineName[turbNum]).lookup("epsilon"));
+    // DCS: epsilon is now read from the blade data file
+    // epsilon = readScalar(turbineArrayProperties.subDict(turbineName[turbNum]).lookup("epsilon"));
     smearRadius = readScalar(turbineArrayProperties.subDict(turbineName[turbNum]).lookup("smearRadius"));
     effectiveRadiusFactor = readScalar(turbineArrayProperties.subDict(turbineName[turbNum]).lookup("effectiveRadiusFactor"));
     pointInterpType = readScalar(turbineArrayProperties.subDict(turbineName[turbNum]).lookup("pointInterpType"));
@@ -389,7 +390,10 @@ void horizontalAxisWindTurbinesFAST::computeBodyForce(int iturb)
             scalar dis = mag(mesh_.C()[sphereCells[iturb][m]] - bladePoints[iturb][j][k]);
             if (dis <= smearRadius)
             {
-              bodyForceFAST[sphereCells[iturb][m]] += bladeForce[iturb][j][k] * (Foam::exp(-Foam::sqr(dis/epsilon))/(Foam::pow(epsilon,3)*Foam::pow(Foam::constant::mathematical::pi,1.5)));
+              // bodyForceFAST[sphereCells[iturb][m]] += bladeForce[iturb][j][k] * (Foam::exp(-Foam::sqr(dis/epsilon))/(Foam::pow(epsilon,3)*Foam::pow(Foam::constant::mathematical::pi,1.5)));
+              // DCS: epsilon changes with the blade station
+              // Info << "DCS: debug in horizontalAxisWindTurbinesFAST.C" << endl;
+              // bodyForceFAST[sphereCells[iturb][m]] += bladeForce[iturb][j][k] * (Foam::exp(-Foam::sqr(dis/epsilon))/(Foam::pow(epsilon,3)*Foam::pow(Foam::constant::mathematical::pi,1.5)));
             }
           }
         }  

@@ -183,7 +183,8 @@ private:
             //  projection of the forces to the grid (i.e., if you integrate the projected
             //  force, it will be significantly smaller than the force that was projected
             //  in the first place.
-            DynamicList<scalar> epsilon;
+            // DynamicList<scalar> epsilon;
+            // DCS: epsilon is defined in a different file, now with the blade data
 
             //- The projection of actuator forces to body forces uses a Gaussian (or some
             //  other smooth normalization could be used).  At some distance away from the
@@ -192,6 +193,7 @@ private:
             //  to save computational effort.  This variable is that distance in (m).  It
             //  is based on epsilon.  The larger epsilon, the wider the projection.
             DynamicList<scalar> projectionRadius;
+            // DCS: testing debug message for variable epsilon modification
 
             //- List of tip/root loss correction type for each turbine.  "none" applies
             //  no correction.  "Glauert" applies the Glauert tip loss correction.
@@ -414,6 +416,10 @@ private:
 
                 //- Airfoil type ID at this station.
                 DynamicList<DynamicList<label> > BladeAirfoilTypeID;
+
+                // DCS: add epsilon at each blade station
+                //- Epsilon at this station (coefficient for the body force speading)
+                DynamicList<DynamicList<scalar> > BladeEpsilon;        
 
 
 

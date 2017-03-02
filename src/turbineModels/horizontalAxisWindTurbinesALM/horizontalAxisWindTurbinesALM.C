@@ -154,7 +154,8 @@ horizontalAxisWindTurbinesALM::horizontalAxisWindTurbinesALM
         pointDistType.append(word(turbineArrayProperties.subDict(turbineName[i]).lookup("pointDistType")));
         pointInterpType.append(word(turbineArrayProperties.subDict(turbineName[i]).lookup("pointInterpType")));
         bladeUpdateType.append(word(turbineArrayProperties.subDict(turbineName[i]).lookup("bladeUpdateType")));
-        epsilon.append(scalar(readScalar(turbineArrayProperties.subDict(turbineName[i]).lookup("epsilon"))));
+        // epsilon.append(scalar(readScalar(turbineArrayProperties.subDict(turbineName[i]).lookup("epsilon"))));
+        // DCS: epsilon is read from a different file, now with the blade data
         tipRootLossCorrType.append(word(turbineArrayProperties.subDict(turbineName[i]).lookup("tipRootLossCorrType")));
         rotationDir.append(word(turbineArrayProperties.subDict(turbineName[i]).lookup("rotationDir")));
         rotSpeed.append(scalar(readScalar(turbineArrayProperties.subDict(turbineName[i]).lookup("RotSpeed"))));
@@ -323,6 +324,8 @@ horizontalAxisWindTurbinesALM::horizontalAxisWindTurbinesALM
         DynamicList<scalar> chord;
         DynamicList<scalar> twist;
         DynamicList<label> id;
+        // DCS: Also read epsilon at each blade station
+        DynamicList<scalar> blade_epsilon;
 
 
         forAll(BladeData[i], j)
@@ -331,17 +334,24 @@ horizontalAxisWindTurbinesALM::horizontalAxisWindTurbinesALM
             chord.append(BladeData[i][j][1]);
             twist.append(BladeData[i][j][2]);
             id.append(BladeData[i][j][3]);
+
+            // DCS: Also read epsilon at each blade station
+            blade_epsilon.append(BladeData[i][j][4]);
         }
 
         BladeStation.append(station);
         BladeChord.append(chord);
         BladeTwist.append(twist);
         BladeAirfoilTypeID.append(id);
+        // DCS: Also read epsilon at each blade station
+        BladeEpsilon.append(blade_epsilon);
 
         station.clear();
         chord.clear();
         twist.clear();
         id.clear();
+        // DCS: Also read epsilon at each blade station
+        blade_epsilon.clear();
     }
 
     
@@ -496,12 +506,17 @@ horizontalAxisWindTurbinesALM::horizontalAxisWindTurbinesALM
     // turbine, the j-index is for each type of turbine--if all turbines
     // are the same, j is always 0, and the k-index is at the individual
     // blade level.)
+    // maxEpsilon = 0;
     for(int i = 0; i < numTurbines; i++)
     {
         // First compute the radius of the force projection (to the radius
         // where the projection is only 0.001 its maximum value - this seems
         // recover 99.9% of the total forces when integrated).
-        projectionRadius.append(epsilon[i] * Foam::sqrt(Foam::log(1.0/0.001)));
+        // projectionRadius.append(epsilon[i] * Foam::sqrt(Foam::log(1.0/0.001)));    
+        // DCS: Also read epsilon at each blade station
+        // DCS: because epsilon is different at each blade station, use the largest
+        //      value of epsilon to estimate the force projection
+        projectionRadius.append(max( BladeEpsilon[i] ) * Foam::sqrt(Foam::log(1.0/0.001)));
 
         // Calculate the sphere of influence radius.
         scalar sphereRadius = 0.0;
@@ -1292,7 +1307,7 @@ void horizontalAxisWindTurbinesALM::computeBodyForce()
 
     forAll(bladeForce, i)
     {
-        
+
         int n = turbineTypeID[i];
 
         // Proceed to compute body forces for turbine i only if there are sphere cells on this processor for this turbine.
@@ -1301,34 +1316,50 @@ void horizontalAxisWindTurbinesALM::computeBodyForce()
             // For each blade.
             forAll(bladeForce[i], j)
             {
+
                 // For each blade point.
                 forAll(bladeForce[i][j], k)
                 {
+                // for the I turbine, for the J blade, for the K blade point
+                //Info << "DCS: i,j,k testing BladeEpsilon[i][k]" << BladeEpsilon[i][k] << endl;
                     // For each sphere cell.
                     forAll(sphereCells[i], m)
                     {
+                    // Info << "DCS: i,m testing BladeEpsilon[i][k]" << BladeEpsilon[i][k] << endl;    
                         scalar dis = mag(mesh_.C()[sphereCells[i][m]] - bladePoints[i][j][k]);
                         if (dis <= projectionRadius[i])
                         {
-                            bodyForce[sphereCells[i][m]] += bladeForce[i][j][k] * (Foam::exp(-Foam::sqr(dis/epsilon[i]))/(Foam::pow(epsilon[i],3)*Foam::pow(Foam::constant::mathematical::pi,1.5)));
-                            thrustBodyForceSum += (-bladeForce[i][j][k] * (Foam::exp(-Foam::sqr(dis/epsilon[i]))/(Foam::pow(epsilon[i],3)*Foam::pow(Foam::constant::mathematical::pi,1.5))) *
+                            // bodyForce[sphereCells[i][m]] += bladeForce[i][j][k] * (Foam::exp(-Foam::sqr(dis/epsilon[i]))/(Foam::pow(epsilon[i],3)*Foam::pow(Foam::constant::mathematical::pi,1.5)));
+                            // thrustBodyForceSum += (-bladeForce[i][j][k] * (Foam::exp(-Foam::sqr(dis/epsilon[i]))/(Foam::pow(epsilon[i],3)*Foam::pow(Foam::constant::mathematical::pi,1.5))) *
+                            //                         mesh_.V()[sphereCells[i][m]]) & uvShaft[i];
+                            // torqueBodyForceSum += ( bladeForce[i][j][k] * (Foam::exp(-Foam::sqr(dis/epsilon[i]))/(Foam::pow(epsilon[i],3)*Foam::pow(Foam::constant::mathematical::pi,1.5))) * 
+                            //                         bladeRadius[i][j][k] * cos(PreCone[n][j]) * mesh_.V()[sphereCells[i][m]]) & bladeAlignedVectors[i][j][1];
+                            // DCS: epsilon can vary along the blade, epsilon[i] becomes BladeEpsilon[i][k]
+                            bodyForce[sphereCells[i][m]] += bladeForce[i][j][k] * (Foam::exp(-Foam::sqr(dis/BladeEpsilon[i][k]))/(Foam::pow(BladeEpsilon[i][k],3)*Foam::pow(Foam::constant::mathematical::pi,1.5)));
+                            thrustBodyForceSum += (-bladeForce[i][j][k] * (Foam::exp(-Foam::sqr(dis/BladeEpsilon[i][k]))/(Foam::pow(BladeEpsilon[i][k],3)*Foam::pow(Foam::constant::mathematical::pi,1.5))) *
                                                     mesh_.V()[sphereCells[i][m]]) & uvShaft[i];
-                            torqueBodyForceSum += ( bladeForce[i][j][k] * (Foam::exp(-Foam::sqr(dis/epsilon[i]))/(Foam::pow(epsilon[i],3)*Foam::pow(Foam::constant::mathematical::pi,1.5))) * 
+                            torqueBodyForceSum += ( bladeForce[i][j][k] * (Foam::exp(-Foam::sqr(dis/BladeEpsilon[i][k]))/(Foam::pow(BladeEpsilon[i][k],3)*Foam::pow(Foam::constant::mathematical::pi,1.5))) * 
                                                     bladeRadius[i][j][k] * cos(PreCone[n][j]) * mesh_.V()[sphereCells[i][m]]) & bladeAlignedVectors[i][j][1];
                         }
                     }
                 }  
-            }
+            }        
         }
+        // Info << "DCS: DEBUG" << endl;
         thrustSum += thrust[i];
         torqueSum += torqueRotor[i];
     }
     reduce(thrustBodyForceSum,sumOp<scalar>());
     reduce(torqueBodyForceSum,sumOp<scalar>());
 
+
+    Info << "DCS: DEBUG Elliptical Epsilon mod" << endl;
+
     // Print information comparing the actual thrust and torque to the integrated body force.
     Info << "Thrust from Body Force = " << thrustBodyForceSum << tab << "Thrust from Act. Line = " << thrustSum << tab << "Ratio = " << thrustBodyForceSum/thrustSum << endl;
     Info << "Torque from Body Force = " << torqueBodyForceSum << tab << "Torque from Act. Line = " << torqueSum << tab << "Ratio = " << torqueBodyForceSum/torqueSum << endl;
+
+
 }
 
 
@@ -1820,7 +1851,9 @@ void horizontalAxisWindTurbinesALM::printDebug()
     Info << "baseLocation = " << baseLocation << endl;
     Info << "numBladePoints = " << numBladePoints << endl;
     Info << "pointDistType = " << pointDistType << endl;
-    Info << "epsilon = " << epsilon << endl;
+    // Info << "epsilon = " << epsilon << endl;
+    // DCS: testing debug message for variable epsilon modification
+    Info << "BladeEpsilon = " << BladeEpsilon << endl;
     Info << "projectionRadius = " << projectionRadius << endl;
     Info << "azimuth = " << azimuth << endl;
     Info << "rotSpeed = " << rotSpeed << endl;

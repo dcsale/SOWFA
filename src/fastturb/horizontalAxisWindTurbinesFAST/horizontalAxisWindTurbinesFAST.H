@@ -96,7 +96,8 @@ private:
 
     scalar yawAngle;
 
-    scalar epsilon;
+    // DCS: epsilon is read from the blade data file now
+    // scalar epsilon;
 
     scalar smearRadius;
 
