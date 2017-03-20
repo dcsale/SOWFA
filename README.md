@@ -1,3 +1,5 @@
+* March 2017, added a new tutorial for hydrokinetic turbines in a flume (mirror from github.com/nnmrec/fastFlume)
+
 SOWFA
 =====
 
