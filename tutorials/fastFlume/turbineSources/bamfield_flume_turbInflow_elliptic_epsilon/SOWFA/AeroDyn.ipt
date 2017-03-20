@@ -1,0 +1,140 @@
+DOE Tidal Turbine Reference Model - Nick's first generation modification (lab scale).  Compatible with AeroDyn v12.58.
+SI          SysUnits    - System of units for used for input and output [must be SI for FAST] (unquoted string)
+BEDDOES     StallMod    - Dynamic stall included [BEDDOES or STEADY] (unquoted string)
+NO_CM       UseCm       - Use aerodynamic pitching moment model? [USE_CM or NO_CM] (unquoted string)
+EQUIL       InfModel    - Inflow model [DYNIN or EQUIL] (unquoted string)
+NONE        IndModel    - Induction-factor model [NONE or WAKE or SWIRL] (unquoted string)
+0.001       AToler      - Induction-factor tolerance (convergence criteria) (-)
+PRAND       TLModel     - Tip-loss model (EQUIL only) [PRAND, GTECH, or NONE] (unquoted string)
+PRAND       HLModel     - Hub-loss model (EQUIL only) [PRAND or NONE] (unquoted string)
+"USERWIND.wnd"          - Name of file containing wind data (quoted string)
+   0.4      HH          - Wind reference (hub) height [TowerHt+Twr2Shft+OverHang*SIN(ShftTilt)] (m)
+   0.0      TwrShad     - Tower-shadow velocity deficit (-)
+   1.0      ShadHWid    - Tower-shadow half width (m)
+9999.9      T_Shad_Refpt- Tower-shadow reference point (m)
+   997.0    AirDens     - Air density (kg/m^3)
+   0.000001 KinVisc     - Kinematic air viscosity [CURRENTLY IGNORED] (m^2/sec)  // DCS: this was used in AeroDyn to compute Reynolds, but it is specified by the airfoil file
+9999.9      DTAero      - Time interval for aerodynamic calculations (sec) 		 // DCS: It seems like this variable is unused for OpenFOAM-FAST coupled version.  Aero forces are calculated accoring to OF timestep, I think.
+   60       NumFoil     - Number of airfoil files (-)                      
+"AeroData/NACA_4415_Re0p120.dat" 	FoilNm      - Names of the airfoil files [NumFoil lines] (quoted strings)
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p120.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p140.dat"
+"AeroData/NACA_4415_Re0p160.dat"
+"AeroData/NACA_4415_Re0p160.dat"
+"AeroData/NACA_4415_Re0p160.dat"
+"AeroData/NACA_4415_Re0p160.dat"
+"AeroData/NACA_4415_Re0p160.dat"
+  60       BldNodes    - Number of blade nodes used for analysis (-)
+RNodes      AeroTwst    DRNodes     Chord    NFoil  PrnElm
+0.0523   19.8922    0.0029    0.0526   1      NOPRINT
+0.0552   17.8553    0.0029    0.0505   2      NOPRINT
+0.0581   16.1327    0.0029    0.0487   3      NOPRINT
+0.0610   14.7686    0.0029    0.0470   4      NOPRINT
+0.0639   13.6368    0.0029    0.0456   5      NOPRINT
+0.0668   12.6463    0.0029    0.0442   6      NOPRINT
+0.0697   11.7811    0.0029    0.0428   7      NOPRINT
+0.0726   11.0234    0.0029    0.0416   8      NOPRINT
+0.0755   10.3557    0.0029    0.0404   9      NOPRINT
+0.0784    9.7712    0.0029    0.0393   10     NOPRINT
+0.0813    9.2511    0.0029    0.0382   11     NOPRINT
+0.0842    8.7721    0.0029    0.0372   12     NOPRINT
+0.0871    8.3343    0.0029    0.0363   13     NOPRINT
+0.0900    7.9436    0.0029    0.0354   14     NOPRINT
+0.0929    7.5901    0.0029    0.0346   15     NOPRINT
+0.0958    7.2631    0.0029    0.0337   16     NOPRINT
+0.0987    6.9615    0.0029    0.0329   17     NOPRINT
+0.1016    6.6863    0.0029    0.0322   18     NOPRINT
+0.1045    6.4340    0.0029    0.0315   19     NOPRINT
+0.1074    6.2018    0.0029    0.0308   20     NOPRINT
+0.1103    5.9880    0.0029    0.0302   21     NOPRINT
+0.1132    5.7937    0.0029    0.0296   22     NOPRINT
+0.1161    5.6154    0.0029    0.0290   23     NOPRINT
+0.1190    5.4478    0.0029    0.0285   24     NOPRINT
+0.1219    5.2908    0.0029    0.0280   25     NOPRINT
+0.1248    5.1450    0.0029    0.0275   26     NOPRINT
+0.1277    5.0095    0.0029    0.0270   27     NOPRINT
+0.1306    4.8847    0.0029    0.0265   28     NOPRINT
+0.1335    4.7691    0.0029    0.0261   29     NOPRINT
+0.1364    4.6610    0.0029    0.0257   30     NOPRINT
+0.1394    4.5599    0.0029    0.0253   31     NOPRINT
+0.1423    4.4652    0.0029    0.0250   32     NOPRINT
+0.1452    4.3764    0.0029    0.0247   33     NOPRINT
+0.1481    4.2938    0.0029    0.0244   34     NOPRINT
+0.1510    4.2165    0.0029    0.0241   35     NOPRINT
+0.1539    4.1414    0.0029    0.0238   36     NOPRINT
+0.1568    4.0688    0.0029    0.0235   37     NOPRINT
+0.1597    4.0016    0.0029    0.0233   38     NOPRINT
+0.1626    3.9388    0.0029    0.0231   39     NOPRINT
+0.1655    3.8779    0.0029    0.0229   40     NOPRINT
+0.1684    3.8190    0.0029    0.0227   41     NOPRINT
+0.1713    3.7623    0.0029    0.0225   42     NOPRINT
+0.1742    3.7075    0.0029    0.0224   43     NOPRINT
+0.1771    3.6537    0.0029    0.0222   44     NOPRINT
+0.1800    3.6012    0.0029    0.0221   45     NOPRINT
+0.1829    3.5509    0.0029    0.0219   46     NOPRINT
+0.1858    3.5026    0.0029    0.0218   47     NOPRINT
+0.1887    3.4541    0.0029    0.0217   48     NOPRINT
+0.1916    3.4055    0.0029    0.0216   49     NOPRINT
+0.1945    3.3569    0.0029    0.0216   50     NOPRINT
+0.1974    3.3083    0.0029    0.0215   51     NOPRINT
+0.2003    3.2605    0.0029    0.0215   52     NOPRINT
+0.2032    3.2136    0.0029    0.0214   53     NOPRINT
+0.2061    3.1652    0.0029    0.0214   54     NOPRINT
+0.2090    3.1153    0.0029    0.0214   55     NOPRINT
+0.2119    3.0663    0.0029    0.0214   56     NOPRINT
+0.2148    3.0181    0.0029    0.0214   57     NOPRINT
+0.2177    2.9675    0.0029    0.0214   58     NOPRINT
+0.2206    2.9144    0.0029    0.0214   59     NOPRINT
+0.2235    2.8592    0.0029    0.0214   60     NOPRINT

@@ -1,0 +1,10 @@
+#!/bin/sh
+cd ${0%/*} || exit 1 # run from this directory
+
+EXEC_VISIT=/usr/local/visit/bin/visit
+
+$EXEC_VISIT -sessionfile visit-fastFlume_Turbine=LabScale.session \ 
+            -source      VTK/*.vtk
+
+/home/danny/workspace/VisIt/visit2_9_2-build/visit2.9.2/src/bin/visit -movie -format png -geometry 1920x939 -output ./visit- 
+-fps 50 -start 0 -end 0 -frame 0 -sessionfile ./visit-.session -email sale.danny@gmail.com -dv

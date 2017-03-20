@@ -1,0 +1,85 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      turbineArrayProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+ 
+globalProperties
+{
+    outputControl       "timeStep";
+    outputInterval       1;
+}
+
+
+// NacYaw:
+// This is the initial or fixed nacelle yaw angle. It is positive counterclockwise when looking down
+// on the turbine (rotate about z-axis). This value must be greater than –180 and less than or equal to 180 degrees.
+turbine1
+{
+    turbineType         "DOE-Tidal-Ref-Model_FullScale";
+    baseLocation        (100.0 110.0 0.0);   // no account for OverHang distance
+    numBladePoints      30;
+    pointDistType       "uniform";
+    pointInterpType     "linear";
+    bladeUpdateType     "oldPosition";
+    
+    // epsilon             2.40;         // mesh = coarse-e1
+    // epsilon             2.70;         // mesh = coarse-e2
+    // epsilon             3.00;         // mesh = coarse-e3
+    // epsilon             2.00;         // mesh = medium1-e1
+    // epsilon             2.25;         // mesh = medium1-e2
+    // epsilon             2.50;         // mesh = medium1-e3
+    // epsilon             1.60;         // mesh = medium2-e1
+    // epsilon             1.80;         // mesh = medium2-e2
+    // epsilon             2.00;         // mesh = medium2-e3
+    epsilon             1.20;         // mesh = fine-e1
+
+    tipRootLossCorrType "Glauert";
+    rotationDir         "ccw";
+    Azimuth             0;
+    TorqueGen                                                9999.9;
+    RotSpeed            11.5;
+    Pitch               0;
+    NacYaw              -90;
+    fluidDensity        1025.0;
+}
+
+turbine2
+{
+    turbineType         "DOE-Tidal-Ref-Model_FullScale";
+    baseLocation        (100.0 138.0 0.0);   // no account for OverHang distance
+    numBladePoints      30;
+    pointDistType       "uniform";
+    pointInterpType     "linear";
+    bladeUpdateType     "oldPosition";
+    
+    // epsilon             2.40;         // mesh = coarse-e1
+    // epsilon             2.70;         // mesh = coarse-e2
+    // epsilon             3.00;         // mesh = coarse-e3
+    // epsilon             2.00;         // mesh = medium1-e1
+    // epsilon             2.25;         // mesh = medium1-e2
+    // epsilon             2.50;         // mesh = medium1-e3
+    // epsilon             1.60;         // mesh = medium2-e1
+    // epsilon             1.80;         // mesh = medium2-e2
+    // epsilon             2.00;         // mesh = medium2-e3
+    epsilon             1.20;         // mesh = fine-e1
+
+    tipRootLossCorrType "Glauert";
+    rotationDir         "cw";
+    Azimuth             90;
+    TorqueGen                                                9999.9;
+    RotSpeed            11.5;   // for U_inflow = 1.9 and TSR = 6.338 
+    Pitch               0;
+    NacYaw              -90;
+    fluidDensity        1025.0;
+}

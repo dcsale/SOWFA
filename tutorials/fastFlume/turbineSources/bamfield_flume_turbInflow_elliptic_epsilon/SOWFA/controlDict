@@ -1,0 +1,103 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.6                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application       fastfoam;
+
+libs              ("libuserfiniteVolume.so");
+
+// startFrom         startTime;
+startFrom         latestTime;
+
+startTime         0.0;
+
+// startTimeMean     0.0;
+startTimeMean     10.0;
+
+// startTimeCorr     0.0;
+startTimeCorr     20.0;
+
+stopAt            endTime;
+
+// endTime           2.0;  // "steady state" should be acheived about 2 to 4 seconds, for single turbine
+endTime           30.0;
+// endTime           0.05;
+
+deltaT            0.00150; // mesh = coarse  (for different values of epsilon)
+// deltaT            0.00120; // mesh = medium1 (for different values of epsilon)
+// deltaT            0.001; // mesh = medium2 (for different values of epsilon)
+// deltaT            0.0008; // mesh = fine(for different values of epsilon)
+
+
+writeControl      adjustableRunTime;
+
+writeInterval     0.02;      // write at 50 frames per second (for movies)
+// writeInterval     0.002;  // testing (debigging) system calls by writing very frequently
+
+// purgeWrite        0;
+purgeWrite        2;          // only keep that last recent saved files
+
+writeFormat       binary;
+//writeFormat       ascii;
+
+writePrecision    12;
+
+//writeCompression  compressed;
+writeCompression  uncompressed;
+
+timeFormat        general;
+
+timePrecision     12;
+
+runTimeModifiable no;
+// runTimeModifiable yes;     // I read that this can slow down the code?
+
+adjustTimeStep    no;
+// adjustTimeStep    yes;
+
+maxCo             0.2;
+// maxCo             0.75;
+
+maxDeltaT         10.0;
+
+
+functions
+  {
+      
+      sysCall
+      {
+          type systemCall;
+          functionObjectLibs ( "libsystemCall.so" );
+                   
+          outputControl outputTime;
+          outputInterval 1;
+
+          // executeCalls 1("echo [sysCall] executeCalls: Execute system call before time iteration is done");
+          
+          // endCalls 1("echo [sysCall] endCalls: Finishing up with a system call, which seems to be before the write call...");
+          
+          writeCalls 1(
+                //"echo [sysCall] writeCalls: Writing to file call" 
+                 
+                // each write interval this script is run, for run time post-processing
+                "./run.master-node-sysCall"
+
+          );
+
+      }
+
+  } //end functions
+

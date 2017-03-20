@@ -1,0 +1,144 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      turbineProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// NOTE: I think many inputs are unneeded when disable DoF for generator and blades
+//       these values are aligned farther towards right (maybe can add ignores in source code)
+
+NumBl                                   2;
+TipRad                           0.225000;
+HubRad                           0.028575;
+UndSling                              0.0;
+OverHang                           -0.001;    // DCS: actual is -0.5.  code crashses if OverHang = 0.0
+TowerHt                               0.4;    // DCS: actual is 0.3429
+Twr2Shft                            0.001;    // DCS: actual is 0.0508    
+ShftTilt                              0.0;
+PreCone                     (0.0 0.0 0.0);
+GBRatio                                            1.0;
+GenIner                                         534.116;
+HubIner                                         115.926E3;
+BladeIner                                       11.776047E6;
+GenTorqueControllerType            "none";
+GenTorqueRateLimiter                false;
+NacYawControllerType               "none";
+BladePitchControllerType           "none";
+RatedRotSpeed                       9999.9;   // I think only relevant when using generator control
+RotSpeedLimiter                      true;
+NacYawRateLimiter                    true;
+BladePitchRateLimiter                true;
+SpeedFilterCornerFrequency                       10; // Hz
+
+GenTorqueControllerParams
+{
+    CutInGenSpeed               670.0;
+    RatedGenSpeed           1173.7;
+    Region2StartGenSpeed        871.0;
+    Region2EndGenSpeed      1161.963;
+    CutInGenTorque              0.0;
+    RatedGenTorque              43.09355E3;
+    RateLimitGenTorque          15.0E3;
+    KGen                        2.55764E-2;
+    TorqueControllerRelax       1.0;
+}
+
+  
+BladePitchControllerParams
+{
+    PitchControlStartPitch    0.0;
+    PitchControlEndPitch      7.6;
+    PitchControlStartSpeed    15.77;
+    PitchControlEndSpeed      16.0;
+    RateLimitBladePitch       4.5;
+} 
+ 
+NacYawControllerParams
+{
+    RateLimitNacYaw     20; 
+}
+
+
+Airfoils
+(
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+    "NACA_4415_lowReynolds"
+);
+
+
+BladeData
+(
+//   NOTE: the first index of airfoil should begin with 0, 
+//         this is different than the typical FAST input 
+//         files which begin index at 1 (C++ vs Fortran)    
+//   radius(m)   chord(m)  aero_twist(deg) airfoil 
+    (0.031849    0.050444    20.070254     0)
+    (0.038396    0.044850    16.379868     1)
+    (0.044944    0.040888    13.859551     2)
+    (0.051491    0.037827    11.975563     3)
+    (0.058039    0.035357    10.505297     4)
+    (0.064586    0.033308     9.326087     5)
+    (0.071134    0.031551     8.347700     6)
+    (0.077681    0.030026     7.527315     7)
+    (0.084229    0.028685     6.832259     8)
+    (0.090776    0.027491     6.237268     9)
+    (0.097324    0.026416     5.722592    10)
+    (0.103871    0.025436     5.272650    11)
+    (0.110419    0.024532     4.875064    12)
+    (0.116966    0.023689     4.519952    13)
+    (0.123514    0.022895     4.199397    14)
+    (0.130061    0.022145     3.911213    15)
+    (0.136609    0.021426     3.646985    16)
+    (0.143156    0.020726     3.398958    17)
+    (0.149704    0.020040     3.163755    18)
+    (0.156251    0.019363     2.939738    19)
+    (0.162799    0.018689     2.723885    20)
+    (0.169346    0.018012     2.510965    21)
+    (0.175894    0.017330     2.299911    22)
+    (0.182441    0.016632     2.087942    23)
+    (0.188989    0.015918     1.872547    24)
+    (0.195536    0.015190     1.653753    25)
+    (0.202084    0.014432     1.426453    26)
+    (0.208631    0.013647     1.190646    27)
+    (0.215179    0.012841     0.948268    28)
+    (0.221726    0.011987     0.689477    29)
+);
+

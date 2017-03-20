@@ -1,0 +1,142 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.6                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// further documentation of this file found at:
+// http://www.openfoam.org/docs/user/blockMesh.php 
+
+convertToMeters 1;
+
+// dimensions of the Bamfield flume
+xi   0.0;      // Minimum x coordinate (inlet of "infinite" domain)
+xf 500.0;      // Maximum x coordinate (outlet of "infinite" domain)
+yi   0.0;      // Minimum y coordinate
+yf 248.0;      // Maximum y coordinate (width of flume)
+zi   0.0;      // Minimum z coordinate
+zf  50.0;      // Maximum z coordinate (free surface of flume)
+
+// adjust mesh size (number of cells in x, y, z)
+// note that size of epsilon (body force spreading) and time step 
+// are effected by mesh size ... see the included spreadsheet file
+// 'Parameters-ActuatorMethod.ods' to help estimate reasonable values.
+
+// mesh=coarse
+Nx 250;
+Ny 124;
+Nz 25;
+// mesh=medium
+// Nx 375;
+// Ny 186;
+// Nz 38;
+// mesh=fine
+// Nx 563;
+// Ny 279;
+// Nz 57;
+
+// define the bounding box
+vertices
+(
+    ($xi $yi $zi) //0
+    ($xf $yi $zi) //1
+    ($xf $yf $zi) //2
+    ($xi $yf $zi) //3
+    ($xi $yi $zf) //4
+    ($xf $yi $zf) //5
+    ($xf $yf $zf) //6
+    ($xi $yf $zf) //7
+);
+
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) ($Nx $Ny $Nz) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+
+   bottom
+   {
+     // type cyclic;
+     type wall;
+     neighbourPatch top;
+     faces
+     (
+       (0 3 2 1)
+     );
+   }
+
+   top
+   {
+     // type cyclic;
+     type wall;       
+     neighbourPatch bottom;
+     faces
+     (
+       (4 5 6 7)
+     );
+   }
+
+   west
+   {
+     type inflow;
+     faces
+     (
+       (0 4 7 3)
+     );
+   }
+
+   east
+   {
+     type outflow;
+     faces
+     (
+       (1 2 6 5)
+     );
+   }
+
+   north
+   {
+     // type cyclic;
+     type wall;      
+     neighbourPatch south;
+     faces
+     (
+       (3 7 6 2)
+     );
+   }
+  
+   south
+   {
+     // type cyclic;
+     type wall;    
+     neighbourPatch north;
+     faces
+     (
+       (0 1 5 4)
+     );
+   }
+
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

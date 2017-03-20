@@ -1,0 +1,33 @@
+#!/bin/sh
+cd ${0%/*} || exit 1 # run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+## Post-Post-Processing ##############################################
+
+## reconstruct before sampling or converting
+reconstructPar -latestTime 2>&1 | tee log.reconstructPar
+
+## compute additional fields, like vorticity
+vorticity -latestTime
+enstrophy -latestTime
+Lambda2 -latestTime
+foamCalc components vorticity -latestTime
+foamCalc components U -latestTime
+foamCalc components UMean -latestTime
+
+## sample the fields 
+sample -latestTime
+
+## convert OpenFOAM format to VTK files (works with VisIt and Paraview, files get big so maybe save fewer fields)
+foamToVTK -latestTime
+
+## Creates symbolic links to all VTK files in a post-processing directory, putting
+#  all the time-step directories into proper sorted order, so VisIt and ParaView can recognize as a sequence
+./foamSequenceVTKFiles.sh
+
+## Runs the VisIt session to make image sequence
+
+## creates a movie from the image sequence
+

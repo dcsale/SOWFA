@@ -1,0 +1,125 @@
+-----  WT_Perf Input File  -----------------------------------------------------
+This file (Optimal Solution) was generated automatically by HARP_Opt on January 24, 2013  5:54 PM 
+This line is for user comments.                                                   
+-----  Input Configuration  ----------------------------------------------------
+False                Echo:                      Echo input parameters to "<rootname>.ech"?
+True                 DimenInp:                  Turbine parameters are dimensional?
+True                 Metric:                    Turbine parameters are Metric (MKS vs FPS)?
+-----  Model Configuration  ----------------------------------------------------
+1                    NumSect:                   Number of circumferential sectors.
+1000                 MaxIter:                   Max number of iterations for induction factor.
+35                   NSplit:                    Max number of splits for binary search method
+1.0e-006             ATol:                      Error tolerance for induction iteration.
+1.0e-006             SWTol:                     Error tolerance for skewed-wake iteration.
+-----  Algorithm Configuration  ------------------------------------------------
+True                 TipLoss:                   Use the Prandtl tip-loss model?
+True                 HubLoss:                   Use the Prandtl hub-loss model?
+True                 Swirl:                     Include Swirl effects?
+True                 SkewWake:                  Apply skewed-wake correction?
+True                 IndType:                   Use BEM induction algorithm?
+True                 AIDrag:                    Use the drag term in the axial induction calculation?
+True                 TIDrag:                    Use the drag term in the tangential induction calculation?
+True                 TISingularity:             Use the singularity avoidance method in the tangential-induction calculation?
+false                DAWT:                      Run Diffuser Augmented Water Turbine Analysis? [feature not implimented yet]
+True                 Cavitation:                Run cavitation check? if cavitation, output sevens, check 12 oclock azimuth
+-----  Cavitation Model  -------------------------------------------------------
+101325               PressAtm:                  Air Atmospheric Pressure, Pa units, absolute
+2500                 PressVapor:                Vapor Pressure of Water, Pa units, absolute
+1.0                  CavSF:                     Cavitation safety factor
+0.8                  WatDepth:                  Depth from water free surface to mudline (tower base)
+-----  Turbine Data  -----------------------------------------------------------
+2                    NumBlade:                  Number of blades.
+0.225000             RotorRad:                  Rotor radius [length].
+0.028575             HubRad:                    Hub radius [length or div by radius].
+0.0                  PreCone:                   Precone angle, positive downstream [deg].
+0.0                  Tilt:                      Shaft tilt [deg].
+0.0                  Yaw:                       Yaw error [deg].
+0.400000             HubHt:                     Hub height [length or div by radius].
+30                   NumSeg:                    Number of blade segments (entire rotor radius).
+RElm       Twist       Chord    AFfile  PrntElem
+0.031849	20.070254	0.050444	1	TRUE
+0.038396	16.379868	0.044850	2	TRUE
+0.044944	13.859551	0.040888	3	TRUE
+0.051491	11.975563	0.037827	4	TRUE
+0.058039	10.505297	0.035357	5	TRUE
+0.064586	 9.326087	0.033308	6	TRUE
+0.071134	 8.347700	0.031551	7	TRUE
+0.077681	 7.527315	0.030026	8	TRUE
+0.084229	 6.832259	0.028685	9	TRUE
+0.090776	 6.237268	0.027491	10	TRUE
+0.097324	 5.722592	0.026416	11	TRUE
+0.103871	 5.272650	0.025436	12	TRUE
+0.110419	 4.875064	0.024532	13	TRUE
+0.116966	 4.519952	0.023689	14	TRUE
+0.123514	 4.199397	0.022895	15	TRUE
+0.130061	 3.911213	0.022145	16	TRUE
+0.136609	 3.646985	0.021426	17	TRUE
+0.143156	 3.398958	0.020726	18	TRUE
+0.149704	 3.163755	0.020040	19	TRUE
+0.156251	 2.939738	0.019363	20	TRUE
+0.162799	 2.723885	0.018689	21	TRUE
+0.169346	 2.510965	0.018012	22	TRUE
+0.175894	 2.299911	0.017330	23	TRUE
+0.182441	 2.087942	0.016632	24	TRUE
+0.188989	 1.872547	0.015918	25	TRUE
+0.195536	 1.653753	0.015190	26	TRUE
+0.202084	 1.426453	0.014432	27	TRUE
+0.208631	 1.190646	0.013647	28	TRUE
+0.215179	 0.948268	0.012841	29	TRUE
+0.221726	 0.689477	0.011987	30	TRUE
+-----  Aerodynamic Data  -------------------------------------------------------
+1000.000000          Rho:                 Air density [mass/volume].
+0.0000010000         KinVisc:             Kinematic air viscosity
+0.000                ShearExp:            Wind shear exponent (1/7 law = 0.143).
+False                UseCm:               Are Cm data included in the airfoil tables?
+True                 UseCpmin:            Are Cp,min data included in the airfoil tables?
+30                                        NumAF:               Number of airfoil files.
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+"Airfoil_Data/NACA_4415_lowReynolds.dat"
+-----  I/O Settings  -----------------------------------------------------------
+False                UnfPower:                  Write parametric power to an unformatted file?
+False                TabDel:                    When generating formatted output (OutForm=True), make output tab-delimited (fixed-width otherwise).
+1                    ConvFlag:                  For non-converging cases, 0 to output the result, 1 to output nines, 2 to output NaN (safest).
+True                 Beep:                      Beep on exit.
+False                KFact:                     Output dimensional parameters in K (e.g., kN instead on N)
+True                 WriteBED:                  Write out blade element data to "<rootname>.bed"?
+False                InputTSR:                  Input speeds as TSRs?
+True                 OutMaxCp:                  Output conditions for the maximum Cp?
+"mps"                SpdUnits:                  Wind-speed units (mps, fps, mph).
+-----  Combined-Case Analysis  -------------------------------------------------
+6                   NumCases:                  Number of cases to run.  Enter zero for parametric analysis.
+WS or TSR   RotSpd   Pitch                      Remove following block of lines if NumCases is zero.
+0.9    190.9859317103    0
+0.9    229.1831180523    0
+0.9    267.3803043944    0
+0.9    305.5774907364    0
+0.9    343.7746770785    0
+0.9    381.9718634205    0

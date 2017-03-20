@@ -1,0 +1,149 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      turbineProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// NOTE: I think many inputs are unneeded when disable DoF for generator and blades
+//       these values are aligned farther towards right (maybe can add ignores in source code)
+
+NumBl                                   2;
+TipRad                               10.0;
+HubRad                                2.0;
+UndSling                              0.0;
+OverHang                           -0.001;    // DCS: code crashses if OverHang = 0.0, why ???
+TowerHt                              30.0;    
+Twr2Shft                            0.001;    
+ShftTilt                              0.0;
+PreCone                     (0.0 0.0 0.0);
+GBRatio                                            1.0;
+GenIner                                         534.116;
+HubIner                                         115.926E3;
+BladeIner                                       11.776047E6;
+GenTorqueControllerType            "none";
+GenTorqueRateLimiter                false;
+NacYawControllerType               "none";
+BladePitchControllerType           "none";
+RatedRotSpeed                       9999.9;   // I think only relevant when using generator control
+RotSpeedLimiter                      true;
+NacYawRateLimiter                    true;
+BladePitchRateLimiter                true;
+SpeedFilterCornerFrequency                       10; // Hz
+
+GenTorqueControllerParams
+{
+    CutInGenSpeed               670.0;
+    RatedGenSpeed           1173.7;
+    Region2StartGenSpeed        871.0;
+    Region2EndGenSpeed      1161.963;
+    CutInGenTorque              0.0;
+    RatedGenTorque              43.09355E3;
+    RateLimitGenTorque          15.0E3;
+    KGen                        2.55764E-2;
+    TorqueControllerRelax       1.0;
+}
+
+  
+BladePitchControllerParams
+{
+    PitchControlStartPitch    0.0;
+    PitchControlEndPitch      7.6;
+    PitchControlStartSpeed    15.77;
+    PitchControlEndSpeed      16.0;
+    RateLimitBladePitch       4.5;
+} 
+ 
+NacYawControllerParams
+{
+    RateLimitNacYaw     20; 
+}
+
+
+Airfoils
+(
+    "NACA6_1000"
+    "NACA6_0864"
+    "NACA6_0629"
+    "NACA6_0444"
+    "NACA6_0329"
+    "NACA6_0276"
+    "NACA6_0259"
+    "NACA6_0247"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+    "NACA6_0240"
+);
+
+
+
+BladeData
+(
+//   NOTE: the first index of airfoil should begin with 0, 
+//         this is different than the typical FAST input 
+//         files which begin index at 1 (C++ vs Fortran)    
+//   radius(m)   chord(m)  aero_twist(deg) airfoil 
+    (1.150    0.800    12.86      0)
+    (1.450    0.894    12.86      1)
+    (1.750    1.118    12.86      2)
+    (2.050    1.386    12.86      3)
+    (2.350    1.610    12.86      4)
+    (2.650    1.704    12.86      5)
+    (2.950    1.662    11.54      6)
+    (3.250    1.619    10.44      7)
+    (3.550    1.577    9.50       8)
+    (3.850    1.534    8.71       9)
+    (4.150    1.492    8.02      10)
+    (4.450    1.450    7.43      11)
+    (4.750    1.407    6.91      12)
+    (5.050    1.365    6.45      13)
+    (5.350    1.322    6.04      14)
+    (5.650    1.279    5.68      15)
+    (5.950    1.235    5.35      16)
+    (6.250    1.192    5.05      17)
+    (6.550    1.148    4.77      18)
+    (6.850    1.103    4.51      19)
+    (7.150    1.058    4.26      20)
+    (7.450    1.012    4.03      21)
+    (7.750    0.966    3.80      22)
+    (8.050    0.920    3.57      23)
+    (8.350    0.872    3.35      24)
+    (8.650    0.824    3.13      25)
+    (8.950    0.776    2.90      26)
+    (9.250    0.726    2.67      27)
+    (9.550    0.676    2.43      28)
+    (9.850    0.626    2.18      29)
+);
+
+
+
+
+

@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<Object name="VisIt">
+    <Field name="Version" type="string">2.9.0</Field>
+    <Object name="GUI">
+        <Object name="FileServerList">
+            <Field name="path" type="string">/gscratch/stf/dsale/OpenFOAM/dsale-2.4.x/fastFlume-LEMOS-full-scale/VTK</Field>
+            <Field name="filter" type="string">*</Field>
+            <Field name="useCurrentDir" type="bool">true</Field>
+            <Field name="automaticFileGrouping" type="bool">true</Field>
+            <Field name="smartFileGrouping" type="bool">true</Field>
+            <Field name="showDotFiles" type="bool">false</Field>
+            <Object name="recentpaths">
+                <Field name="localhost" type="stringVector">"/gscratch/stf/dsale/OpenFOAM/dsale-2.4.x/fastFlume-LEMOS-full-scale" "/gscratch/stf/dsale/OpenFOAM/dsale-2.4.x/fastFlume-LEMOS-full-scale/VTK" </Field>
+            </Object>
+        </Object>
+        <Object name="AppearanceAttributes">
+            <Field name="useSystemDefault" type="bool">true</Field>
+            <Field name="background" type="string">#c0c0c0</Field>
+            <Field name="foreground" type="string">#000000</Field>
+            <Field name="fontName" type="string">Helvetica,12,-1,5,50,0,0,0,0,0</Field>
+            <Field name="style" type="string">motif</Field>
+            <Field name="orientation" type="int">0</Field>
+            <Field name="defaultForeground" type="string">#000000</Field>
+            <Field name="defaultBackground" type="string">#d4d0c8</Field>
+            <Field name="defaultFontName" type="string">"Sans Serif,9,-1,5,50,0,0,0,0,0"</Field>
+            <Field name="defaultStyle" type="string">windows</Field>
+            <Field name="defaultOrientation" type="int">0</Field>
+        </Object>
+        <Object name="Annotation">
+            <Field name="x" type="int">86</Field>
+            <Field name="y" type="int">109</Field>
+            <Field name="width" type="int">502</Field>
+            <Field name="height" type="int">720</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+            <Field name="activeTab" type="int">3</Field>
+        </Object>
+        <Field name="postWhenShown" type="bool">false</Field>
+        <Object name="Appearance">
+            <Field name="x" type="int">216</Field>
+            <Field name="y" type="int">239</Field>
+            <Field name="width" type="int">257</Field>
+            <Field name="height" type="int">253</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Compute engines">
+            <Field name="x" type="int">60</Field>
+            <Field name="y" type="int">83</Field>
+            <Field name="width" type="int">334</Field>
+            <Field name="height" type="int">378</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Expressions">
+            <Field name="x" type="int">242</Field>
+            <Field name="y" type="int">265</Field>
+            <Field name="width" type="int">709</Field>
+            <Field name="height" type="int">581</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="File open">
+            <Field name="x" type="int">8</Field>
+            <Field name="y" type="int">31</Field>
+            <Field name="width" type="int">563</Field>
+            <Field name="height" type="int">462</Field>
+            <Field name="visible" type="bool">false</Field>
+        </Object>
+        <Object name="Interactors">
+            <Field name="x" type="int">242</Field>
+            <Field name="y" type="int">265</Field>
+            <Field name="width" type="int">351</Field>
+            <Field name="height" type="int">402</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Preferences">
+            <Field name="x" type="int">34</Field>
+            <Field name="y" type="int">57</Field>
+            <Field name="width" type="int">502</Field>
+            <Field name="height" type="int">864</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Rendering options">
+            <Field name="x" type="int">190</Field>
+            <Field name="y" type="int">213</Field>
+            <Field name="width" type="int">424</Field>
+            <Field name="height" type="int">486</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="MainWin">
+            <Field name="x" type="int">8</Field>
+            <Field name="y" type="int">31</Field>
+            <Field name="width" type="int">372</Field>
+            <Field name="height" type="int">1050</Field>
+            <Field name="SPLITTER_VALUES_V2" type="floatVector">0 0.542208 0.453463 </Field>
+        </Object>
+        <Object name="Contour plot attributes">
+            <Field name="x" type="int">1454</Field>
+            <Field name="y" type="int">290</Field>
+            <Field name="width" type="int">449</Field>
+            <Field name="height" type="int">720</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Pseudocolor plot attributes">
+            <Field name="x" type="int">923</Field>
+            <Field name="y" type="int">375</Field>
+            <Field name="width" type="int">459</Field>
+            <Field name="height" type="int">499</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Slice operator attributes">
+            <Field name="x" type="int">190</Field>
+            <Field name="y" type="int">213</Field>
+            <Field name="width" type="int">356</Field>
+            <Field name="height" type="int">431</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Field name="plotDatabases" type="stringVector">"localhost:/gscratch/stf/dsale/OpenFOAM/dsale-2.4.x/fastFlume-LEMOS-full-scale/VTK/fastFlume-LEMOS-full-scale_*.vtk database" </Field>
+        <Object name="TimeFormat">
+            <Field name="displayMode" type="string">CyclesAndTimes</Field>
+            <Field name="precision" type="int">5</Field>
+        </Object>
+        <Field name="showSelectedFiles" type="bool">false</Field>
+        <Field name="allowFileSelectionChange" type="bool">true</Field>
+        <Field name="enableWarningMessagePopups" type="bool">true</Field>
+    </Object>
+</Object>

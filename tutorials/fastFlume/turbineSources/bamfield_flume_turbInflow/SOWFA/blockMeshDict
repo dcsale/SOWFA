@@ -1,0 +1,162 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.6                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// further documentation of this file found at:
+// http://www.openfoam.org/docs/user/blockMesh.php 
+
+convertToMeters 1;
+
+// dimensions of the Bamfield flume (use an adjusted length to make all mesh cells isotropic)
+// MESH = coarse, medium1
+xi   0.0;      // Minimum x coordinate (inlet of flume)
+xf   6.3;      // Maximum x coordinate (outlet of flume)
+yi   0.0;      // Minimum y coordinate
+yf   1.0;      // Maximum y coordinate (width of flume)
+zi   0.0;      // Minimum z coordinate
+zf   0.8;      // Maximum z coordinate (free surface of flume)
+// // MESH = medium2
+// xi   0.0;      // Minimum x coordinate (inlet of flume)
+// xf   6.3;      // Maximum x coordinate (outlet of flume)
+// yi   0.0;      // Minimum y coordinate
+// yf   0.99750;  // Maximum y coordinate (width of flume)
+// zi   0.0;      // Minimum z coordinate
+// zf   0.80250;  // Maximum z coordinate (free surface of flume)
+// MESH = fine
+// xi   0.0;      // Minimum x coordinate (inlet of flume)
+// xf   6.3;      // Maximum x coordinate (outlet of flume)
+// yi   0.0;      // Minimum y coordinate
+// yf   1.002;    // Maximum y coordinate (width of flume)
+// zi   0.0;      // Minimum z coordinate
+// zf   0.798;    // Maximum z coordinate (free surface of flume)
+
+
+// adjust mesh size (number of cells in x, y, z)
+// note that size of epsilon (body force spreading) and time step 
+// are effected by mesh size ... see the included spreadsheet file
+// 'Parameters-ActuatorMethod.ods' to help estimate reasonable values.
+
+// mesh=coarse (for different epsilon values)
+Nx 504;
+Ny 80;
+Nz 64;
+// mesh=medium1
+// Nx 630;
+// Ny 100;
+// Nz 80;
+// // mesh=medium2
+// Nx 840;
+// Ny 133;
+// Nz 107;
+// mesh=fine
+// Nx 926;
+// Ny 147;
+// Nz 118;
+
+// define the bounding box
+vertices
+(
+    ($xi $yi $zi) //0
+    ($xf $yi $zi) //1
+    ($xf $yf $zi) //2
+    ($xi $yf $zi) //3
+    ($xi $yi $zf) //4
+    ($xf $yi $zf) //5
+    ($xf $yf $zf) //6
+    ($xi $yf $zf) //7
+);
+
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) ($Nx $Ny $Nz) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+
+   bottom
+   {
+     // type cyclic;
+     type wall;
+     neighbourPatch top;
+     faces
+     (
+       (0 3 2 1)
+     );
+   }
+
+   top
+   {
+     // type cyclic;
+     type wall;       
+     neighbourPatch bottom;
+     faces
+     (
+       (4 5 6 7)
+     );
+   }
+
+   west
+   {
+     type inflow;
+     faces
+     (
+       (0 4 7 3)
+     );
+   }
+
+   east
+   {
+     type outflow;
+     faces
+     (
+       (1 2 6 5)
+     );
+   }
+
+   north
+   {
+     // type cyclic;
+     type wall;      
+     neighbourPatch south;
+     faces
+     (
+       (3 7 6 2)
+     );
+   }
+  
+   south
+   {
+     // type cyclic;
+     type wall;    
+     neighbourPatch north;
+     faces
+     (
+       (0 1 5 4)
+     );
+   }
+
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

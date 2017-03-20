@@ -1,0 +1,32 @@
+#!/bin/sh
+cd ${0%/*} || exit 1 # run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+# Automatically get the number of processors to run on from system/decomposeParDict
+# but it seems that OpenFOAM's v2.4.x built in function does not work?
+#nProc=$(getNumberOfProcessors)
+
+# Revert to standard utilities
+nProc=$(sed -ne 's/^numberOfSubdomains *\(.*\);/\1/p' system/decomposeParDict)
+
+
+# detect if using OpenMPI or Intel MPI
+# list out the modules in use, write into text file, hide output
+module list 2>&1 | tee log.modules > /dev/null
+
+# determine if Intel MPI or OpenMPI 
+if grep -q impi log.modules; then
+    bind="-binding cell=core"
+    echo "using Intel MPI with flag:" $bind
+else
+    bind="--bind-to core"
+    echo "using OpenMPI with flag:" $bind
+fi
+
+
+# Run the solver (parallel)
+#mpirun $bind -np $nProc pisoFoamTurbine -parallel 2>&1 | tee log.pisoFoamTurbine
+mpirun $bind -np $nProc pisoFoamTurbine-LEMOS -parallel 2>&1 | tee log.pisoFoamTurbine-LEMOS
+

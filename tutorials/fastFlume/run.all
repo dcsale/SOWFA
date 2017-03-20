@@ -1,0 +1,104 @@
+#!/bin/sh
+cd ${0%/*} || exit 1 # run from this directory
+
+## SOURCE OpenFOAM run functions
+source $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+## select the turbine type and scenario
+DIR_turbine='turbineSources/bamfield_flume_turbInflow'
+# DIR_turbine='turbineSources/tidal-turbine-lab-scale'
+# DIR_turbine='turbineSources/tidal-turbine-lab-scale-turbInflow'
+# DIR_turbine='turbineSources/tidal-turbine-full-scale'
+# DIR_turbine='turbineSources/tidal-turbine-full-scale-turbInflow'
+
+
+echo '*==============================================================================='
+echo '* ███████╗ █████╗ ███████╗████████╗███████╗██╗     ██╗   ██╗███╗   ███╗███████╗ '
+echo '* ██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔════╝██║     ██║   ██║████╗ ████║██╔════╝ '
+echo '* █████╗  ███████║███████╗   ██║   █████╗  ██║     ██║   ██║██╔████╔██║█████╗   '
+echo '* ██╔══╝  ██╔══██║╚════██║   ██║   ██╔══╝  ██║     ██║   ██║██║╚██╔╝██║██╔══╝   '
+echo '* ██║     ██║  ██║███████║   ██║   ██║     ███████╗╚██████╔╝██║ ╚═╝ ██║███████╗ '
+echo '* ╚═╝     ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═╝     ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝ '
+echo '*                                                                               '
+echo "* Starting OpenFOAM job at: " $(date)                                           
+echo '*==============================================================================='
+
+
+## CHECK if the decomposed mesh already exists
+DIR="./processor*"
+if [ "$(ls -A $DIR)" ]; then
+    echo ""
+    echo "Do not re-create mesh because $DIR is not empty"
+    echo "Attempt to continue solver from last time step"
+    echo ""
+    echo "re-initializing FAST from last saved OpenFOAM timestep"
+    echo ""
+
+    cd utilities
+    ./reinitialize-FAST.sh
+    cd ..
+
+    # Decompose the mesh and solution files (serial)
+    # if the processor directories already exist then this is skipped
+    decomposePar 2>&1 | tee log.decomposePar
+
+
+else
+    echo ""
+    echo "The processor directories $DIR are empty or not found"
+    echo "Starting from a clean state"
+    echo ""
+    echo "Copying the input files from turbineSources into SOWFA directories"
+    echo ""
+
+    cp $DIR_turbine/SOWFA/U 0.original/U
+    cp $DIR_turbine/SOWFA/blockMeshDict constant/polyMesh/blockMeshDict
+    cp $DIR_turbine/SOWFA/controlDict system/controlDict
+    cp $DIR_turbine/SOWFA/decomposeParDict system/decomposeParDict
+    cp $DIR_turbine/SOWFA/sampleDict system/sampleDict
+
+    rm -rf constant/turbineProperties/
+    rm -rf constant/airfoilProperties/
+    rm -rf AeroData/
+    cp -r $DIR_turbine/SOWFA/turbineProperties constant/turbineProperties
+    cp -r $DIR_turbine/SOWFA/airfoilProperties constant/airfoilProperties
+    cp -r $DIR_turbine/SOWFA/AeroData AeroData
+
+    cp $DIR_turbine/SOWFA/turbineArrayProperties constant/turbineArrayProperties
+    cp $DIR_turbine/SOWFA/turbineArrayPropertiesFAST constant/turbineArrayPropertiesFAST 
+    cp $DIR_turbine/SOWFA/AeroDyn.ipt AeroDyn.ipt
+    cp $DIR_turbine/SOWFA/Blade.dat Blade.dat
+    cp $DIR_turbine/SOWFA/Tower.dat Tower.dat
+    cp $DIR_turbine/SOWFA/primary.fst primary.fst
+
+
+
+    echo ""
+    echo "Re-create the mesh, decompose and initialize FAST"
+    echo ""
+
+    ## create mesh and decompose
+    ./run.meshing 2>&1 | tee log.run.meshing
+
+fi
+
+
+## CONTINUE running the solver
+./run.solver 2>&1 | tee log.run.solver
+
+
+## POST_PROCESS (note: run time post-proccesing is performed in controlDict)
+./run.post-process 2>&1 | tee log.run.post-process
+./run.post-post-process 2>&1 | tee log.run.post-post-process
+
+echo '*==============================================================================='
+echo "* Ending OpenFOAM job at: " $(date)
+echo '*                                                                               '
+echo '* ███████╗ █████╗ ███████╗████████╗███████╗██╗     ██╗   ██╗███╗   ███╗███████╗ '
+echo '* ██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔════╝██║     ██║   ██║████╗ ████║██╔════╝ '
+echo '* █████╗  ███████║███████╗   ██║   █████╗  ██║     ██║   ██║██╔████╔██║█████╗   '
+echo '* ██╔══╝  ██╔══██║╚════██║   ██║   ██╔══╝  ██║     ██║   ██║██║╚██╔╝██║██╔══╝   '
+echo '* ██║     ██║  ██║███████║   ██║   ██║     ███████╗╚██████╔╝██║ ╚═╝ ██║███████╗ '
+echo '* ╚═╝     ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═╝     ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝ '
+echo '*                                                                               '
+echo '*==============================================================================='

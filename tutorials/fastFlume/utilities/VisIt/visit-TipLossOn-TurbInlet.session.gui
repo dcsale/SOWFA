@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<Object name="VisIt">
+    <Field name="Version" type="string">2.10.0</Field>
+    <Object name="GUI">
+        <Object name="FileServerList">
+            <Field name="path" type="string">/mnt/data-RAID-1/danny/fastFlume-testGlauert/on/fastFlume-GENERAL/sequencedVTK</Field>
+            <Field name="filter" type="string">*.session</Field>
+            <Field name="useCurrentDir" type="bool">true</Field>
+            <Field name="automaticFileGrouping" type="bool">false</Field>
+            <Field name="smartFileGrouping" type="bool">false</Field>
+            <Field name="showDotFiles" type="bool">false</Field>
+            <Object name="recentpaths">
+                <Field name="localhost" type="stringVector">"/mnt/data-RAID-1/danny/fastFlume-testGlauert/off/fastFlume-GENERAL" "/home/danny/workspace/VisIt/visit2_9_2-build/visit2.9.2/src/bin" "/home/danny" "/home/danny/OpenFOAM" "/home/danny/OpenFOAM/danny-2.4.x" "/home/danny/OpenFOAM/danny-2.4.x/fastFlume-test-export" "/home/danny/OpenFOAM/danny-2.4.x/fastFlume-test-export/VTK" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/off/fastFlume-GENERAL/postProcessing" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/off/fastFlume-GENERAL/postProcessing/surfaces" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/off/fastFlume-GENERAL/postProcessing/surfaces/3.0204" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/off" "/mnt/data-RAID-1/danny/fastFlume-testGlauert" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/on" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/on/fastFlume-GENERAL" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/on/fastFlume-GENERAL/postProcessing" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/on/fastFlume-GENERAL/postProcessing/surfaces" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/on/fastFlume-GENERAL/postProcessing/surfaces/4.1604" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/on/fastFlume-GENERAL/postProcessing/surfaces/9.7404" "/mnt/data-RAID-1/danny/fastFlume-testGlauert/on/fastFlume-GENERAL/sequencedVTK" </Field>
+            </Object>
+        </Object>
+        <Object name="AppearanceAttributes">
+            <Field name="useSystemDefault" type="bool">true</Field>
+            <Field name="background" type="string">#c0c0c0</Field>
+            <Field name="foreground" type="string">#000000</Field>
+            <Field name="fontName" type="string">Helvetica,12,-1,5,50,0,0,0,0,0</Field>
+            <Field name="style" type="string">motif</Field>
+            <Field name="orientation" type="int">0</Field>
+            <Field name="defaultForeground" type="string">#e0dedb</Field>
+            <Field name="defaultBackground" type="string">#302f2f</Field>
+            <Field name="defaultFontName" type="string">"Sans Serif,9,-1,5,50,0,0,0,0,0"</Field>
+            <Field name="defaultStyle" type="string">plastique</Field>
+            <Field name="defaultOrientation" type="int">0</Field>
+        </Object>
+        <Object name="Annotation">
+            <Field name="x" type="int">536</Field>
+            <Field name="y" type="int">0</Field>
+            <Field name="width" type="int">510</Field>
+            <Field name="height" type="int">720</Field>
+            <Field name="visible" type="bool">true</Field>
+            <Field name="posted" type="bool">false</Field>
+            <Field name="activeTab" type="int">5</Field>
+        </Object>
+        <Field name="postWhenShown" type="bool">false</Field>
+        <Object name="Color tables">
+            <Field name="x" type="int">210</Field>
+            <Field name="y" type="int">454</Field>
+            <Field name="width" type="int">367</Field>
+            <Field name="height" type="int">866</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+            <Field name="currentColorTable" type="string">xray</Field>
+        </Object>
+        <Object name="Export Database">
+            <Field name="x" type="int">752</Field>
+            <Field name="y" type="int">1251</Field>
+            <Field name="width" type="int">294</Field>
+            <Field name="height" type="int">396</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="File open">
+            <Field name="x" type="int">0</Field>
+            <Field name="y" type="int">574</Field>
+            <Field name="width" type="int">588</Field>
+            <Field name="height" type="int">440</Field>
+            <Field name="visible" type="bool">false</Field>
+        </Object>
+        <Object name="Information">
+            <Field name="x" type="int">279</Field>
+            <Field name="y" type="int">672</Field>
+            <Field name="width" type="int">483</Field>
+            <Field name="height" type="int">302</Field>
+            <Field name="visible" type="bool">false</Field>
+        </Object>
+        <Object name="Preferences">
+            <Field name="x" type="int">515</Field>
+            <Field name="y" type="int">906</Field>
+            <Field name="width" type="int">529</Field>
+            <Field name="height" type="int">774</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="MainWin">
+            <Field name="x" type="int">0</Field>
+            <Field name="y" type="int">0</Field>
+            <Field name="width" type="int">364</Field>
+            <Field name="height" type="int">1651</Field>
+            <Field name="SPLITTER_VALUES_V2" type="floatVector">0 0.5430072 0.4530532 </Field>
+        </Object>
+        <Object name="Pseudocolor plot attributes">
+            <Field name="x" type="int">368</Field>
+            <Field name="y" type="int">703</Field>
+            <Field name="width" type="int">461</Field>
+            <Field name="height" type="int">468</Field>
+            <Field name="visible" type="bool">true</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Slice operator attributes">
+            <Field name="x" type="int">372</Field>
+            <Field name="y" type="int">1227</Field>
+            <Field name="width" type="int">374</Field>
+            <Field name="height" type="int">420</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Field name="plotDatabases" type="stringVector">"localhost:/mnt/data-RAID-1/danny/fastFlume-testGlauert/on/fastFlume-GENERAL/sequencedVTK/Ux_plane-yx_z=0.4__.*.vtk database" </Field>
+        <Object name="TimeFormat">
+            <Field name="displayMode" type="string">Cycles</Field>
+            <Field name="precision" type="int">5</Field>
+        </Object>
+        <Field name="showSelectedFiles" type="bool">false</Field>
+        <Field name="allowFileSelectionChange" type="bool">true</Field>
+        <Field name="enableWarningMessagePopups" type="bool">true</Field>
+    </Object>
+</Object>

@@ -1,0 +1,80 @@
+DOE Tidal Turbine Reference Model - Nick's first generation modification (lab scale).  Compatible with AeroDyn v12.58.
+SI          SysUnits    - System of units for used for input and output [must be SI for FAST] (unquoted string)
+BEDDOES     StallMod    - Dynamic stall included [BEDDOES or STEADY] (unquoted string)
+NO_CM       UseCm       - Use aerodynamic pitching moment model? [USE_CM or NO_CM] (unquoted string)
+EQUIL       InfModel    - Inflow model [DYNIN or EQUIL] (unquoted string)
+NONE        IndModel    - Induction-factor model [NONE or WAKE or SWIRL] (unquoted string)
+0.005       AToler      - Induction-factor tolerance (convergence criteria) (-)
+PRAND       TLModel     - Tip-loss model (EQUIL only) [PRAND, GTECH, or NONE] (unquoted string)
+PRAND       HLModel     - Hub-loss model (EQUIL only) [PRAND or NONE] (unquoted string)
+"USERWIND.wnd"          - Name of file containing wind data (quoted string)
+  30.0      HH          - Wind reference (hub) height [TowerHt+Twr2Shft+OverHang*SIN(ShftTilt)] (m)
+   0.0      TwrShad     - Tower-shadow velocity deficit (-)
+   1.0      ShadHWid    - Tower-shadow half width (m)
+9999.9      T_Shad_Refpt- Tower-shadow reference point (m)
+   1025.0   AirDens     - Air density (kg/m^3)
+   0.000001 KinVisc     - Kinematic air viscosity [CURRENTLY IGNORED] (m^2/sec)
+9999.9      DTAero      - Time interval for aerodynamic calculations (sec) 		// DCS: It seems like this variable is unused for OpenFOAM-FAST coupled version.  Aero forces are calculated accoring to OF timestep, I think.
+   30       NumFoil     - Number of airfoil files (-)
+"AeroData/NACA6_1000.dat"                         FoilNm      - Names of the airfoil files [NumFoil lines] (quoted strings)
+"AeroData/NACA6_0864.dat"
+"AeroData/NACA6_0629.dat"
+"AeroData/NACA6_0444.dat"
+"AeroData/NACA6_0329.dat"
+"AeroData/NACA6_0276.dat"
+"AeroData/NACA6_0259.dat"
+"AeroData/NACA6_0247.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+"AeroData/NACA6_0240.dat"
+   30       BldNodes    - Number of blade nodes used for analysis (-)
+RNodes      AeroTwst    DRNodes     Chord    NFoil  PrnElm
+1.150    12.86  0.30   0.800    1	 NOPRINT
+1.450    12.86  0.30   0.894    2	 NOPRINT
+1.750    12.86  0.30   1.118    3	 NOPRINT
+2.050    12.86  0.30   1.386    4	 NOPRINT
+2.350    12.86  0.30   1.610    5	 NOPRINT
+2.650    12.86  0.30   1.704    6	 NOPRINT
+2.950    11.54  0.30   1.662    7	 NOPRINT
+3.250    10.44  0.30   1.619    8	 NOPRINT
+3.550    9.50   0.30   1.577    9	 NOPRINT
+3.850    8.71   0.30   1.534    10	 NOPRINT
+4.150    8.02   0.30   1.492    11	 NOPRINT
+4.450    7.43   0.30   1.450    12	 NOPRINT
+4.750    6.91   0.30   1.407    13	 NOPRINT
+5.050    6.45   0.30   1.365    14	 NOPRINT
+5.350    6.04   0.30   1.322    15	 NOPRINT
+5.650    5.68   0.30   1.279    16	 NOPRINT
+5.950    5.35   0.30   1.235    17	 NOPRINT
+6.250    5.05   0.30   1.192    18	 NOPRINT
+6.550    4.77   0.30   1.148    19	 NOPRINT
+6.850    4.51   0.30   1.103    20	 NOPRINT
+7.150    4.26   0.30   1.058    21	 NOPRINT
+7.450    4.03   0.30   1.012    22	 NOPRINT
+7.750    3.80   0.30   0.966    23	 NOPRINT
+8.050    3.57   0.30   0.920    24	 NOPRINT
+8.350    3.35   0.30   0.872    25	 NOPRINT
+8.650    3.13   0.30   0.824    26	 NOPRINT
+8.950    2.90   0.30   0.776    27	 NOPRINT
+9.250    2.67   0.30   0.726    28	 NOPRINT
+9.550    2.43   0.30   0.676    29	 NOPRINT
+9.850    2.18   0.30   0.626    30	 NOPRINT

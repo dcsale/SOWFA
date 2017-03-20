@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# rm -rf processor*
+# rm -rf log*
+# rm -rf *.out 
+# cp constant/polyMesh/blockMeshDict ./
+# rm -rf constant/polyMesh/*
+# mv ./blockMeshDict constant/polyMesh/blockMeshDict
+
+cd ${0%/*} || exit 1    # run from this directory
+
+# Source tutorial clean functions
+. $WM_PROJECT_DIR/bin/tools/CleanFunctions
+
+
+
+# cleanCase performs (under the hood in OpenFOAM):
+# rm -rf processor* > /dev/null 2>&1
+# rm -rf postProcessing > /dev/null 2>&1
+# rm -rf probes* > /dev/null 2>&1
+# rm -rf forces* > /dev/null 2>&1
+# rm -rf graphs* > /dev/null 2>&1
+# rm -rf sets > /dev/null 2>&1
+# rm -rf surfaceSampling > /dev/null 2>&1
+# rm -rf cuttingPlane > /dev/null 2>&1
+# rm -rf system/machines > /dev/null 2>&1
+cleanCase
+
+# suggest to perform some extra cleaning manually
+rm -rf log*
+rm -rf *.out
+rm -rf turbineOutput/*
+rm -rf postProcessing
+# cp constant/polyMesh/blockMeshDict ./
+# rm constant/polyMesh/boundary
+# mv ./blockMeshDict constant/polyMesh/blockMeshDict
+
+rm -rf 0
+rm -rf 0.unused
+
+# rm -rf temp.parReconstructPar
+
+# # Delete all integer time directories
+# ls | grep -P "^[0-9]$" | xargs -d"\n" rm -rf
+
+# # Delete all decimal time directories
+# ls | grep -P "^[0-9].*[0-9]$" | xargs -d"\n" rm -rf
+
+# rm -rf processor*
+# rm -rf postProcessing
+# rm -rf oldLogs
+# rm -f log.pimpleDyMFoam
+# rm -f log.vorticity
+# rm -f log.decomposePar
+# rm -f log.reconstructPar

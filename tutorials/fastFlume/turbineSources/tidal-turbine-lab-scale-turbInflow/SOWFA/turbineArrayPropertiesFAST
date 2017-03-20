@@ -1,0 +1,65 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.6                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      turbineArrayProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+turbine0
+{
+  refx  1.35;
+  refy  0.5;
+  refz  0.0;
+  hubz  0.4;
+}
+
+{
+  yawAngle                0.0;
+  numberofBld             2;
+  numberofBldPts          30;           
+  rotorDiameter           0.45;
+
+  epsilon             0.025000;         // mesh = coarse-e1
+  // epsilon             0.028125;         // mesh = coarse-e2
+  // epsilon             0.031250;         // mesh = coarse-e3
+  // epsilon             0.020000;         // mesh = medium1-e1
+  // epsilon             0.022500;         // mesh = medium1-e2
+  // epsilon             0.025000;         // mesh = medium1-e3
+  // epsilon             0.015000;         // mesh = medium2-e1
+  // epsilon             0.016875;         // mesh = medium2-e2
+  // epsilon             0.018750;         // mesh = medium2-e3
+
+  smearRadius             0.05000000;         // mesh = coarse-e1
+  // smearRadius             0.06328125;         // mesh = coarse-e2
+  // smearRadius             0.07812500;         // mesh = coarse-e3
+  // smearRadius             0.04000000;         // mesh = medium1-e1
+  // smearRadius             0.05062500;         // mesh = medium1-e2
+  // smearRadius             0.06250000;         // mesh = medium1-e3
+  // smearRadius             0.03000000;         // mesh = medium2-e1
+  // smearRadius             0.03796875;         // mesh = medium2-e2
+  // smearRadius             0.04687500;         // mesh = medium2-e3
+
+  effectiveRadiusFactor             1.2222303030;         // mesh = coarse-e1
+  // effectiveRadiusFactor             1.2812577085;         // mesh = coarse-e2
+  // effectiveRadiusFactor             1.3472295532;         // mesh = coarse-e3
+  // effectiveRadiusFactor             1.1777861635;         // mesh = medium1-e1
+  // effectiveRadiusFactor             1.2250080625;         // mesh = medium1-e2
+  // effectiveRadiusFactor             1.2777855072;         // mesh = medium1-e3
+  // effectiveRadiusFactor             1.1333420479;         // mesh = medium2-e1
+  // effectiveRadiusFactor             1.1687584505;         // mesh = medium2-e2
+  // effectiveRadiusFactor             1.2083415070;         // mesh = medium2-e3
+
+  
+  // pointInterpType         1;
+  pointInterpType         0;
+}
+

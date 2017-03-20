@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      turbineArrayProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+ 
+globalProperties
+{
+    outputControl       "timeStep";
+    outputInterval       1;
+}
+
+
+// NacYaw:
+// This is the initial or fixed nacelle yaw angle. It is positive counterclockwise when looking down
+// on the turbine (rotate about z-axis). This value must be greater than –180 and less than or equal to 180 degrees.
+
+turbine1
+{
+    
+    turbineType         "lab-scale.turbineProperties";
+    baseLocation        (1.35 0.5 0.0);   // account for OverHang distance
+    fluidDensity        997.0;
+    numBladePoints      30;
+    NacYaw              -90;          // this is streamwise because of the FAST coordinate system, and the x-direction is streamwise in OpenFOAM
+    Pitch               0;
+    Azimuth             0.0;         // Initial azimuth angle for blade 1 (degrees)
+
+    tipRootLossCorrType "Glauert";
+    // tipRootLossCorrType "none";  
+    rotationDir         "ccw";
+    pointDistType       "uniform";
+    pointInterpType     "linear";
+    // pointInterpType     "cellCenter";
+    bladeUpdateType     "oldPosition";
+    TorqueGen                                                9999.9;    
+
+  epsilon             0.025000;         // mesh = coarse-e1
+  // epsilon             0.028125;         // mesh = coarse-e2
+  // epsilon             0.031250;         // mesh = coarse-e3
+  // epsilon             0.020000;         // mesh = medium1-e1
+  // epsilon             0.022500;         // mesh = medium1-e2
+  // epsilon             0.025000;         // mesh = medium1-e3
+  // epsilon             0.015000;         // mesh = medium2-e1
+  // epsilon             0.016875;         // mesh = medium2-e2
+  // epsilon             0.018750;         // mesh = medium2-e3
+  // epsilon             0.012;         // mesh = fine
+
+    // RotSpeed            190.99;      // for U_inflow = 0.9 m/s TSR = 5.0
+    // RotSpeed            236.83;      // for U_inflow = 0.9 m/s TSR = 6.2
+    RotSpeed            267.38;      // for U_inflow = 0.9 m/s TSR = 7.0
+    // RotSpeed            324.67;      // for U_inflow = 0.9 m/s TSR = 8.5
+    // RotSpeed            381.97;      // for U_inflow = 0.9 m/s TSR = 10.0
+
+
+}
+

@@ -1,0 +1,11 @@
+#!/bin/sh
+cd ${0%/*} || exit 1 # run from this directory
+
+SESSION=visit-TipLossOn-TurbInlet.session
+EXEC_VISIT=/home/danny/workspace/VisIt/visit2_10_0.linux-x86_64/bin/visit
+FAST_DIR=$(pwd)
+
+$EXEC_VISIT -sessionfile $FAST_DIR/utilities/VisIt/$SESSION -source $FAST_DIR/VTK/*.vtk
+
+#/home/danny/workspace/VisIt/visit2_9_2-build/visit2.9.2/src/bin/visit -movie -format png -geometry 1920x939 -output ./visit- 
+#-fps 50 -start 0 -end 0 -frame 0 -sessionfile ./visit-.session -email sale.danny@gmail.com -dv

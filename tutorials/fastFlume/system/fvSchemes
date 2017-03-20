@@ -1,0 +1,151 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.6                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+//  default                        backward;
+//    default                        CrankNicolson 1.0;    // version 2.2+
+    default                        CrankNicolson 0.90;    // version 2.2+
+    // default                        CrankNicholson 1.0;   // version 2.1
+}
+
+gradSchemes
+{
+    default                        Gauss linear;
+    grad(U)                        Gauss linear;
+}
+
+
+//divSchemes
+//{
+//    default                        Gauss linear;
+//    div(phi,U)                     Gauss linear;
+//    div(phi,T)                     Gauss linear;
+//    div(R)                         Gauss linear;
+//    div(U)                         Gauss linear;
+//    div((nuEff*dev(grad(U).T())))  Gauss linear;
+//    div(B)                         Gauss linear;
+//    div(phi,B)                     Gauss linear;
+//}
+divSchemes
+{
+    default                        Gauss linear;
+    // div(phi,U)                     Gauss linear;
+    div(phi,U)                     Gauss localBlended midPoint upwind;
+    // div(phi,T)                     Gauss linear;
+    div(R)                         Gauss linear;
+    div(U)                         Gauss linear;
+    // div((nuEff*dev(grad(U).T())))  Gauss linear;
+    div(B)                         Gauss linear;
+    div(phi,B)                     Gauss linear;
+}
+
+//laplacianSchemes
+//{
+//    default                        Gauss linear uncorrected;
+//    laplacian(rUA,p)               Gauss linear uncorrected;
+//    laplacian((1|A(U)),p)          Gauss linear uncorrected;
+//    laplacian(interpolate((1|A(U))),p) Gauss linear uncorrected;
+//    laplacian(interpolate((1|A(U))),pd) Gauss linear uncorrected;
+//    laplacian(nu,U)                Gauss linear uncorrected;
+//    laplacian(nuEff,U)             Gauss linear uncorrected;
+//    laplacian(kappaEff,T)          Gauss linear uncorrected;
+//    laplacian(DBEff,B)             Gauss linear uncorrected;
+//    laplacian(nuSgs,U)             Gauss linear uncorrected;
+//}
+laplacianSchemes
+{
+    default                        Gauss linear uncorrected;
+    laplacian(rUA,p)               Gauss linear uncorrected;
+    laplacian((1|A(U)),p)          Gauss linear uncorrected;
+    laplacian(interpolate((1|A(U))),p) Gauss linear uncorrected;
+    laplacian(interpolate((1|A(U))),pd) Gauss linear uncorrected;
+    laplacian(nu,U)                Gauss linear uncorrected;
+    laplacian(nuEff,U)             Gauss linear uncorrected;
+    // laplacian(kappaEff,T)          Gauss linear uncorrected;
+    laplacian(DBEff,B)             Gauss linear uncorrected;
+    laplacian(nuSgs,U)             Gauss linear uncorrected;
+}
+
+interpolationSchemes
+{
+    default                        linear;
+}
+
+snGradSchemes
+{
+    default                        uncorrected;
+}
+
+fluxRequired
+{
+    default                        no;
+    p;
+}
+
+//relaxationFactors
+//{
+//    U                              0.5;
+//    pd                             0.5;
+//    T                              0.5;
+//    R                              0.5;
+//}
+
+schemeBlending
+{
+    // These inputs used in pisoFoamTurbine?
+    // xBlending1      0.20;
+    // xBlending2      0.40;
+    // xBlending3      0.60;
+    // xBlending4      0.80;
+    // blendingFactor1 0.25;
+    // blendingFactor2 0.75;
+    
+
+    xBlending1                       -100;  // i think this puts the "blending region" outside the domain, so effectively no blending is performed
+    xBlending2                        -99;
+    xBlending3                        -98;
+    xBlending4                        -97;
+    blendingFactor1                   0.9;
+    blendingFactor2                   1.0;
+
+    // These inputs used in ABLSolvers?
+    // faceSize1
+    // faceSize2
+    // faceSize3
+    // faceSize4
+    // blendingFactorU1
+    // blendingFactorU2
+    // blendingFactorU3
+    // blendingFactorU4
+    // blendingFactorT1
+    // blendingFactorT2
+    // blendingFactorT3
+    // blendingFactorT4
+}
+
+// schemeBlending
+//  {
+//     xBlending1                       -1.8;
+//     xBlending2                        0.0;
+//     xBlending3                        8.0;
+//     xBlending4                       10.0;
+//     blendingFactor1                   0.9;
+//     blendingFactor2                   1.0;
+// }
+
+// ************************************************************************* //

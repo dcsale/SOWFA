@@ -1,0 +1,111 @@
+/*-------------------------------*- C++ -*---------------------------------*\
+|    =========                                                              |
+|    \\      /     OpenFOAM                                                 |
+|     \\    /                                                               |
+|      \\  /       The Open Source CFD Toolbox                              |
+|       \\/                                        http://www.OpenFOAM.org  |
+\*-------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    note        "mesh decomposition control dictionary";
+    location    "system";
+    object      decomposeParDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Number of domains should be at least the number of turbines, but usually larger
+numberOfSubdomains  16;
+// numberOfSubdomains  32;
+// numberOfSubdomains  48;
+// numberOfSubdomains  64;
+// numberOfSubdomains  96;
+// numberOfSubdomains  128;
+
+method          simple;
+// method          scotch;
+
+
+preservePatches (bottom top north south);
+
+simpleCoeffs
+{
+    // n           (1 1 1);
+    n           ($numberOfSubdomains 1 1);
+    delta       0.001;
+}
+
+// hierarchicalCoeffs
+// {
+//     n           (1 1 3);
+//     delta       0.001;
+//     order       xyz;
+// }
+
+
+// number of lines for METIS is same as number subdomains
+// metisCoeffs
+// {
+//     processorWeights
+//     (
+//         1
+//         1
+//         1
+//         1
+//         1
+//         1
+//         1
+//         1        
+//     );
+// }
+
+
+
+// scotchCoeffs
+// {
+//     processorWeights
+//     (
+//             1
+//             1
+//             1
+//             1
+//             1
+//             1
+//             1
+//             1
+//             writeGraph  true;
+//             strategy    "b";
+//     );
+
+// }
+
+
+// manualCoeffs
+// {
+//     dataFile    "decompositionData";
+// }
+
+
+// Is the case distributed
+distributed     no;
+// distributed     yes;
+
+// Per slave (so nProcs-1 entries) the directory above the case.
+// for example, if using 3 nodes (1 master and 2 slaves), each node
+// has 8 cores, so this adds to $numberOfSubdomains, with 
+// 8 cores being used on the master node.
+// roots $numberOfSubdomains-1
+// (
+//    // "/scr/stf/dsale/fastFlume"
+//    // "/scr/stf/dsale/fastFlume"
+//    "machines"
+// );
+// where "machines" is the machine file generated
+// is the current working directory, I think it can be generated
+// by bash command:
+// cat $PBS_NODEFILE > machines
+
+// ************************************************************************* //

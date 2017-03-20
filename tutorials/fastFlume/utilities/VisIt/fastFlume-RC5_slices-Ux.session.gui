@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<Object name="VisIt">
+    <Field name="Version" type="string">2.9.2</Field>
+    <Object name="GUI">
+        <Object name="FileServerList">
+            <Field name="path" type="string">/mnt/data-RAID-1/danny/fastFlume-RC5_Turbine=LabScale1_Layout=SingleRotor_TSR=6.2_Mesh=medium/VTK</Field>
+            <Field name="filter" type="string">*</Field>
+            <Field name="useCurrentDir" type="bool">true</Field>
+            <Field name="automaticFileGrouping" type="bool">true</Field>
+            <Field name="smartFileGrouping" type="bool">true</Field>
+            <Field name="showDotFiles" type="bool">false</Field>
+            <Object name="recentpaths">
+                <Field name="localhost" type="stringVector">"/home/danny/workspace/VisIt/visit2_9_2.linux-x86_64/bin" "/home/danny/workspace/VisIt/visit2_9_2-build/visit2.9.2/src/bin" "/mnt" "/mnt/data-RAID-1" "/mnt/data-RAID-1/danny" "/mnt/data-RAID-1/danny/fastFlume-RC5_Turbine=LabScale1_Layout=SingleRotor_TSR=6.2_Mesh=medium" "/mnt/data-RAID-1/danny/fastFlume-RC5_Turbine=LabScale1_Layout=SingleRotor_TSR=6.2_Mesh=medium/VTK" </Field>
+            </Object>
+        </Object>
+        <Object name="AppearanceAttributes">
+            <Field name="useSystemDefault" type="bool">true</Field>
+            <Field name="background" type="string">#c0c0c0</Field>
+            <Field name="foreground" type="string">#000000</Field>
+            <Field name="fontName" type="string">Helvetica,12,-1,5,50,0,0,0,0,0</Field>
+            <Field name="style" type="string">motif</Field>
+            <Field name="orientation" type="int">0</Field>
+            <Field name="defaultForeground" type="string">#e0dedb</Field>
+            <Field name="defaultBackground" type="string">#302f2f</Field>
+            <Field name="defaultFontName" type="string">"Sans Serif,9,-1,5,50,0,0,0,0,0"</Field>
+            <Field name="defaultStyle" type="string">plastique</Field>
+            <Field name="defaultOrientation" type="int">0</Field>
+        </Object>
+        <Object name="Annotation">
+            <Field name="x" type="int">372</Field>
+            <Field name="y" type="int">837</Field>
+            <Field name="width" type="int">510</Field>
+            <Field name="height" type="int">720</Field>
+            <Field name="visible" type="bool">true</Field>
+            <Field name="posted" type="bool">false</Field>
+            <Field name="activeTab" type="int">2</Field>
+        </Object>
+        <Field name="postWhenShown" type="bool">false</Field>
+        <Object name="Color tables">
+            <Field name="x" type="int">520</Field>
+            <Field name="y" type="int">758</Field>
+            <Field name="width" type="int">367</Field>
+            <Field name="height" type="int">708</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+            <Field name="currentColorTable" type="string">hot</Field>
+        </Object>
+        <Object name="Compute engines">
+            <Field name="x" type="int">698</Field>
+            <Field name="y" type="int">0</Field>
+            <Field name="width" type="int">344</Field>
+            <Field name="height" type="int">350</Field>
+            <Field name="visible" type="bool">true</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Information">
+            <Field name="x" type="int">279</Field>
+            <Field name="y" type="int">672</Field>
+            <Field name="width" type="int">483</Field>
+            <Field name="height" type="int">302</Field>
+            <Field name="visible" type="bool">false</Field>
+        </Object>
+        <Object name="MainWin">
+            <Field name="x" type="int">0</Field>
+            <Field name="y" type="int">0</Field>
+            <Field name="width" type="int">364</Field>
+            <Field name="height" type="int">1651</Field>
+            <Field name="SPLITTER_VALUES_V2" type="floatVector">0 0.9527249 0.04333552 </Field>
+        </Object>
+        <Object name="Contour plot attributes">
+            <Field name="x" type="int">376</Field>
+            <Field name="y" type="int">412</Field>
+            <Field name="width" type="int">451</Field>
+            <Field name="height" type="int">720</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Mesh plot attributes">
+            <Field name="x" type="int">376</Field>
+            <Field name="y" type="int">394</Field>
+            <Field name="width" type="int">374</Field>
+            <Field name="height" type="int">565</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Pseudocolor plot attributes">
+            <Field name="x" type="int">430</Field>
+            <Field name="y" type="int">1098</Field>
+            <Field name="width" type="int">461</Field>
+            <Field name="height" type="int">468</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Slice operator attributes">
+            <Field name="x" type="int">365</Field>
+            <Field name="y" type="int">991</Field>
+            <Field name="width" type="int">374</Field>
+            <Field name="height" type="int">420</Field>
+            <Field name="visible" type="bool">false</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Object name="Transform operator attributes">
+            <Field name="x" type="int">372</Field>
+            <Field name="y" type="int">383</Field>
+            <Field name="width" type="int">440</Field>
+            <Field name="height" type="int">421</Field>
+            <Field name="visible" type="bool">true</Field>
+            <Field name="posted" type="bool">false</Field>
+        </Object>
+        <Field name="plotDatabases" type="stringVector">"localhost:/mnt/data-RAID-1/danny/fastFlume-RC5_Turbine=LabScale1_Layout=SingleRotor_TSR=6.2_Mesh=medium/VTK/fastFlume-RC5_Turbine=LabScale1_Layout=SingleRotor_TSR=6.2_Mesh=medium_*.vtk database" </Field>
+        <Object name="TimeFormat">
+            <Field name="displayMode" type="string">Cycles</Field>
+            <Field name="precision" type="int">5</Field>
+        </Object>
+        <Field name="showSelectedFiles" type="bool">false</Field>
+        <Field name="allowFileSelectionChange" type="bool">true</Field>
+        <Field name="enableWarningMessagePopups" type="bool">true</Field>
+    </Object>
+</Object>

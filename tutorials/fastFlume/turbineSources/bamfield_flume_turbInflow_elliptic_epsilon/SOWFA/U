@@ -1,0 +1,96 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.6                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      U.uniform;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// InflowSpeed 1.15;
+// InflowSpeed 1.0;
+InflowSpeed 0.9;
+
+dimensions      [ 0 1 -1 0 0 0 0 ];
+
+internalField   uniform ( $InflowSpeed 0 0 );
+
+boundaryField
+{
+    bottom
+    {
+      // type cyclic;
+      type slip;
+      // type zeroGradient
+    }
+ 
+    top
+    {
+      // type cyclic;
+      type slip;     
+      // type zeroGradient       
+    }
+
+    // inlet (for uniform constant)
+    // west
+    // {
+    //   type            fixedValue;
+    //   value           uniform ( $InflowSpeed 0 0 );
+    // }
+
+    // inlet (for turbulent inflow generator)
+    // Description
+    //     direction: It is +1 or −1 depending on wheather the flow goes in positive or negative x-direction,respectively.
+    //     LField: The integral length field.
+    //     refField: The external velocity field.
+    //     RField: The Reynolds stress tensor field.
+    //     value: The value of the field; at the initial time it should be equal to the refField field.    
+    west
+    {
+      type decayingTurbulenceInflowGenerator;
+      direction 1;
+      // LField    nonuniform List<scalar> ...
+      // refField  nonuniform List<vector> ...
+      // RField    nonuniform List<symmTensor> ...
+      // value     nonuniform List<vector> ...
+
+        // using the relations: v'=0.75*u' and w'=0.56*u' and case of Iu=10% and Lx/D=0.2 relating diameter to integral length scale
+        LField          uniform 0.10;
+        refField        uniform ( $InflowSpeed 0 0 );
+        RField          uniform (0.0081 0 0 0.00455625 0 0.00254016);
+        // RField          uniform (0.0081 0.006075 0.004536 0.00455625 0.003402 0.00254016);  // anisotropic does not seem to be finished yet
+        value           uniform ( $InflowSpeed 0 0 );
+
+    }
+
+    // outlet
+    east
+    {
+      type            zeroGradient;
+    }
+
+    north
+    {
+      // type cyclic;
+      type slip;  
+      // type zeroGradient          
+    }
+
+    south
+    {
+      // type cyclic;
+      type slip; 
+      // type zeroGradient           
+    }
+}
+
+
+// ************************************************************************* //

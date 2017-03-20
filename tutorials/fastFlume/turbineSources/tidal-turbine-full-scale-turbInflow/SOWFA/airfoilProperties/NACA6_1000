@@ -1,0 +1,36 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.0.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      airfoilProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// AeroDyn airfoil file.  Compatible with AeroDyn v13.0.
+// Circular cross section with multiple Reynolds Numbers.
+// Fourth column is the minimum pressure coefficient.
+// 1        Number of airfoil tables in this file
+//  8.0      Reynolds number in millions
+// 0		 Control Setting (integer)
+// 0.0000		Stall angle (deg)
+// 0.0000		Zero Cn angle of attack (deg)
+// 0.0000		Cn slope for zero lift (dimensionless)
+// 0.0000		Cn extrapolated to value at positive stall angle of attack
+// 0.0000		Cn at stall value for negative angle of attack
+// 0.0000		Angle of attack for minimum CD (deg)
+// 0.7	    	Minimum CD value
+
+airfoilData
+(
+//   alpha   C_l    C_d
+	(-180.0    0.0   0.7)
+	( 180.0    0.0   0.7)
+);
