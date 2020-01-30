@@ -128,3 +128,4 @@ tutorials since the `precursorABL` simulation is too coarse to create
 meaningful inflow data for the `windPlant` simulations.  We leave it to
 the user to experiment with this.
 
+[![DOI](https://zenodo.org/badge/22867070.svg)](https://zenodo.org/badge/latestdoi/22867070)
